@@ -6,7 +6,7 @@ import FormView from "../form/formView";
 import Count from "../form/number";
 import Radio from "../form/radio";
 import Select from "../form/select";
-import TextArea from "../form/textArea";
+import TextArea from "../form/textarea";
 import FileUpload from "../form/upload";
 
 export default function FormPage() {
