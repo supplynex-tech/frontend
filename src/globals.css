@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Baloo';
+  src: url('../public/assets/fonts/BalooBhaijaan2-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --font-display: "Baloo", "sans-serif";
+
+  --color-primary-50: #f0edf9;
+  --color-primary-100: #d8d3f4;
+  --color-primary-200: #b1a9e4;
+  --color-primary-300: #867dca;
+  --color-primary-400: #685fb0;
+  --color-primary-500: #4f4691;
+  --color-primary-600: #372e6d;
+  --color-primary-700: #211951;
+  --color-primary-800: #1a123f;
+  --color-primary-900: #150e33;
+
+  --color-secondary-50: #fffbea;
+  --color-secondary-100: #fef5cd;
+  --color-secondary-200: #fdeaa8;
+  --color-secondary-300: #fadd7d;
+  --color-secondary-400: #f7cf58;
+  --color-secondary-500: #f3c22b;
+  --color-secondary-600: #e5b600;
+  --color-secondary-700: #cca300;
+  --color-secondary-800: #b59100;
+  --color-secondary-900: #9c7e00;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #211951;
+  background-color: #f0edf9;
+}
+
+@layer utilities {
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-rounded {
+    scrollbar-width: thin;
+    scrollbar-color: #d8d3f4 transparent;
+  }
+
+  .scrollbar-rounded::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-rounded::-webkit-scrollbar-thumb {
+    background-color: #d8d3f4;
+    border-radius: 9999px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .scrollbar-rounded::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-left {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fade-left {
+    animation: fade-left 0.5s ease-out both;
+  }
+
+  .animate-once {
+    animation-iteration-count: 1;
+  }
+
+  .animate-delay-\[15ms\] {
+    animation-delay: 15ms;
+  }
+
+  .animate-ease-linear {
+    animation-timing-function: linear;
+  }
+}
+
+@media (max-width: 300px) {
+  .grid-cols-xs-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

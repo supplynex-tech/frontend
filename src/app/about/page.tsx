@@ -1,11 +1,10 @@
 import LandingLayout from "@/components/layouts/LandingLayout";
-import LandingPage from "@/components/pages/Landing";
+import AboutPage from "@/components/pages/About";
 
-
-export default function HomePage() {
+export default function Page() {
     return (
         <LandingLayout>
-            <LandingPage />
+            <AboutPage />
         </LandingLayout>
     )
 }
