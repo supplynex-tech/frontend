@@ -1,11 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion";
-import { HugeButton } from "../base/button";
+import { PrimaryNavigationButton } from "../base/button";
 
 const data = {
     text: "اگر دنبال خرید هوشمندانه تر هستید، همین حالا نیاز خود را ثبت کنید.",
-    button: { title: 'شروع', href: '/dashboard' },
+    button: { title: 'شروع', href: '/form' },
 }
 
 
@@ -24,7 +24,7 @@ export default function CTA() {
                     </p>
                 </motion.section>
                 <div className="w-[50%]">
-                    <HugeButton title={data.button.title} href={data.button.href} />
+                    <PrimaryNavigationButton title={data.button.title} href={data.button.href} />
                 </div>
             </div>
         </section>

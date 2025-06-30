@@ -1,32 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import Modal, { ResponseModal } from "../base/modal";
 
 export default function FormList() {
     const tableHeaders = ["نام", "وضعیت", "تاریخ ایجاد", "فاکتور"];
-
     const tableData = [
-        {
-            name: "John Michael",
-            status: "در حال بررسی",
-            createdAt: "1403/03/10",
-        },
-        {
-            name: "Alexa Liras",
-            status: "بررسی شده",
-            createdAt: "1403/02/28",
-        },
-        {
-            name: "Laurent Perrier",
-            status: "بررسی شده",
-            createdAt: "1403/02/10",
-        },
-        {
-            name: "Michael Levi",
-            status: "در حال بررسی",
-            createdAt: "1403/01/15",
-        },
+        { name: "John Michael", status: "در حال بررسی", createdAt: "1403/03/10" },
+        { name: "Alexa Liras", status: "بررسی شده", createdAt: "1403/02/28" },
+        { name: "Laurent Perrier", status: "بررسی شده", createdAt: "1403/02/10" },
+        { name: "Michael Levi", status: "در حال بررسی", createdAt: "1403/01/15" },
     ];
+
+    const [isModalOpen, setModalOpen] = useState(false);
 
     const getStatusClass = (status: string) => {
         switch (status) {
@@ -49,8 +35,7 @@ export default function FormList() {
         <section className="pt-10">
             <span className="block text-lg font-semibold mb-4">فرم‌های من</span>
 
-            <div
-                className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
+            <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
         [&::-webkit-scrollbar]:h-1
         [&::-webkit-scrollbar-track]:rounded-full
         [&::-webkit-scrollbar-track]:bg-gray-200
@@ -78,13 +63,22 @@ export default function FormList() {
                                 </td>
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.createdAt}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
-                                    <span className={getInvoiceClass(row.status)}>مشاهده</span>
+                                    <span
+                                        className={getInvoiceClass(row.status)}
+                                        onClick={() => {
+                                            if (row.status === "بررسی شده") setModalOpen(true);
+                                        }}
+                                    >
+                                        مشاهده
+                                    </span>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+
+            {isModalOpen && <ResponseModal onClose={() => setModalOpen(false)} />}
         </section>
     );
 }

@@ -2,28 +2,67 @@
 
 import Link from "next/link"
 
-export function AnimatedButton({ children, width = 'w-auto', height, href = "/", type = "button" }) {
+interface PrimaryButtonProps {
+    title: string;
+    type: "button" | "submit" | "reset";
+    onClick: () => void;
+    className?: string;
+}
+
+interface SecondaryButtonProps {
+    title: string;
+    href: string;
+    className?: string;
+}
+
+export function PrimaryActionButton({ title, type, onClick, className = "" }: PrimaryButtonProps) {
+    return (
+        <button
+            onClick={onClick}
+            type={type}
+            className={`px-6 py-3 rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-md border-0 text-gray-800
+                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md ${className}`}
+        >
+            {title}
+        </button>
+    )
+}
+
+export function SecondaryActionButton({ title, type, onClick, className }: PrimaryButtonProps) {
+    return (
+        <button
+            onClick={onClick}
+            type={type}
+            className={`px-6 py-3 rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-md border-0 text-gray-800
+                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md ${className}`}
+        >
+            {title}
+        </button>
+    )
+}
+
+export function PrimaryNavigationButton({ title, href, className }: SecondaryButtonProps) {
     return (
         <Link href={href}>
             <button
-                type={type}
-                className={`px-6 py-3  rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-lg border-0 text-gray-800
-                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md ${width} sm:${height}`}
+                className={`px-6 py-3 rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-md border-0 text-gray-800
+                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md ${className}`}
             >
-                {children}
+                {title}
             </button>
         </Link >
     )
 }
 
-export function TinyButton({ title, href }) {
-    return <AnimatedButton width="w-[150px]" href={href}>{title}</AnimatedButton>
-}
-
-export function HugeButton({ title, href }) {
-    return <AnimatedButton width="w-full" height="h-[60px]" href={href}>{title}</AnimatedButton>
-}
-
-export function SubmitButton({ title, href }) {
-    return <AnimatedButton width="w-[150px]" height="h-[40px]" href={href} type="submit">{title}</AnimatedButton>
+export function SecondaryNavigationButton({ title, href, className }: SecondaryButtonProps) {
+    return (
+        <Link href={href}>
+            <button
+                className={`px-6 py-3 rounded-lg bg-primary-300 hover:bg-primary-400 font-semibold sm:text-md border-0 text-gray-800
+                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md ${className}`}
+            >
+                {title}
+            </button>
+        </Link >
+    )
 }

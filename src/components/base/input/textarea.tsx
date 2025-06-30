@@ -31,7 +31,7 @@ export default function Textarea({
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}
-                className="w-full mt-2 border-2 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                className="w-full mt-2 border-2 placeholder-gray-400 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-primary-100 focus:ring-1 focus:ring-primary-100"
             />
         </InputBox>
     );

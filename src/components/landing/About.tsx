@@ -1,6 +1,6 @@
 'use client'
 
-import { TinyButton } from "@/components/base/button";
+import { PrimaryNavigationButton } from "@/components/base/button";
 
 const data = {
     title: 'درباره ما',
@@ -81,7 +81,7 @@ export default function About() {
                 </div>
             ))}
             <div className="flex justify-end pt-5">
-                <TinyButton title={data.button.title} href={data.button.href} />
+                <PrimaryNavigationButton title={data.button.title} href={data.button.href} />
             </div>
         </section>
 

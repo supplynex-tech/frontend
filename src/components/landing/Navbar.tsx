@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { TinyButton } from '../base/button'
+import Image from 'next/image'
+import logoImage from "@/../public/assets/images/logo.png";
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -21,19 +23,22 @@ export default function Navbar() {
     { title: 'آموزش', href: '/#instructions' },
     { title: 'سوالات متداول', href: '/#questions' },
     { title: 'درباره ما', href: '/about' },
-    { title: 'شروع', href: '/dashboard' },
   ]
 
   return (
     <nav className="fixed w-full z-20 top-0 start-0 lg:py-5">
       <div className="bg-gray-50 lg:rounded-lg lg:w-[80%] flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap">SupplyNex</span>
-          <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Logo" />
+          {/* <span className="self-center text-2xl font-semibold whitespace-nowrap">SupplyNex</span> */}
+          <Image
+            src={logoImage}
+            alt="عکس کاربر"
+            className="w-25"
+          />
         </Link>
 
         <div className="flex md:order-2 space-x-3 md:space-x-0">
-          <TinyButton title={navItems[navItems.length-1].title} href={navItems[navItems.length-1].href} />
+          <TinyButton title="ورود" href="/dashboard" />
           <button
             type="button"
             className="relative w-10 h-10 flex flex-col justify-center items-center md:hidden"
@@ -56,11 +61,10 @@ export default function Navbar() {
                 <li key={index}>
                   <Link
                     href={item.href}
-                    className={`block py-2 px-3 rounded-sm transition-all duration-200 ${
-                      isActive
+                    className={`block py-2 px-3 rounded-sm transition-all duration-200 ${isActive && !item.href.startsWith('/#')
                         ? 'text-secondary-500 font-semibold'
-                        : 'text-gray-600 hover:text-primary-400'
-                    }`}
+                        : 'text-gray-600'
+                      } ${!item.href.startsWith('/#') ? 'hover:text-primary-400' : ''}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.title}
