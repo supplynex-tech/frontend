@@ -20,9 +20,13 @@ interface Props {
 
 export default function ScrollingDatePicker({ value, onChange }: Props) {
   const today = toJalaali(new Date());
-  const [year, setYear] = useState(today.jy);
-  const [month, setMonth] = useState(today.jm);
-  const [day, setDay] = useState(today.jd);
+  const initialYear = value ? parseInt(value.split("/")[0], 10) : today.jy;
+  const initialMonth = value ? parseInt(value.split("/")[1], 10) : today.jm;
+  const initialDay = value ? parseInt(value.split("/")[2], 10) : today.jd;
+
+  const [year, setYear] = useState(initialYear);
+  const [month, setMonth] = useState(initialMonth);
+  const [day, setDay] = useState(initialDay);
 
   const yearRef = useRef<HTMLDivElement>(null);
   const monthRef = useRef<HTMLDivElement>(null);
@@ -35,7 +39,7 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
   useEffect(() => {
     const final = `${year}/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`;
     onChange?.(final);
-  }, [year, month, day]);
+  }, [year, month, day, onChange]);
 
   // Scroll to center selected items
   useEffect(() => {
@@ -49,7 +53,7 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
     scrollToCenter(yearRef.current, years.indexOf(year));
     scrollToCenter(monthRef.current, month - 1);
     scrollToCenter(dayRef.current, days.indexOf(day));
-  }, [year, month, day]);
+  }, [year, month, day, days, years]);
 
   return (
     <div dir="ltr" className="flex z-50 absolute gap-4 items-start bg-gray-50 p-4 rounded-xl shadow-md w-full mx-auto mt-4">
@@ -72,7 +76,7 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
       </div>
 
       {/* ماه */}
-      <div ref={monthRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory  [&::-webkit-scrollbar]:w-1
+      <div ref={monthRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:w-1
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200   
   [&::-webkit-scrollbar-thumb]:rounded-full

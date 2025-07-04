@@ -1,11 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import {
-    FaInstagram,
-    FaTwitter,
-    FaLinkedin,
-} from "react-icons/fa";
 
 export default function Footer() {
     const contactInfo = {
@@ -26,12 +21,6 @@ export default function Footer() {
         { title: "درباره ما", href: "/about" },
         { title: "قوانین و مقررات", href: "/faq" },
         { title: "سوالات متداول", href: "/#questions" },
-    ];
-
-    const socialIcons = [
-        { icon: FaInstagram, label: "اینستاگرام", href: "#", color: "hover:text-primary-300" },
-        { icon: FaTwitter, label: "توییتر", href: "#", color: "hover:text-primary-300" },
-        { icon: FaLinkedin, label: "لینکدین", href: "#", color: "hover:text-primary-300" },
     ];
 
     return (
@@ -63,15 +52,6 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-
-                {/* Social Icons */}
-                {/* <div className="flex flex-row gap-4 text-xl mt-8 md:mt-0">
-                    {socialIcons.map(({ icon: Icon, href, label, color }, i) => (
-                        <Link key={i} href={href} aria-label={label}>
-                            <Icon className={`cursor-pointer ${color}`} />
-                        </Link>
-                    ))}
-                </div> */}
             </div>
         </footer>
     );

@@ -14,7 +14,7 @@ export default function RegisterView() {
     };
 
     return (
-        <div className="flex flex-col gap-3 sm:gap-5 pt-3">
+        <div className="flex flex-col gap-3 sm:w-[350px] sm:gap-5 pt-3 relative">
             <h2 className="font-bold text-xl">احراز هویت</h2>
             {
                 step === "phone" ? (

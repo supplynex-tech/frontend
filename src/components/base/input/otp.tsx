@@ -5,11 +5,11 @@ import InputBox from "./inputBox";
 
 type Props = {
     length?: number;
-    label:string
-    name:string
+    label: string
+    name: string
 };
 
-export default function OtpInput({ length = 6 , label, name}: Props) {
+export default function OtpInput({ length = 6, label, name }: Props) {
     const [values, setValues] = useState<string[]>(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -59,7 +59,7 @@ export default function OtpInput({ length = 6 , label, name}: Props) {
 
     return (
         <InputBox label={label} name={name}>
-            <div className="flex flex-row-reverse gap-2 justify-center dir-rtl pt-5">
+            <div className="flex flex-row-reverse gap-2 justify-center pt-5">
                 {values.map((value, index) => (
                     <input
                         key={index}
@@ -70,7 +70,7 @@ export default function OtpInput({ length = 6 , label, name}: Props) {
                         value={value}
                         onChange={(e) => handleChange(index, e.target.value)}
                         onKeyDown={(e) => handleKeyDown(index, e)}
-                        className="w-10 h-10 text-center text-lg border-2 border-gray-200 rounded-lg focus:outline-none focus:border-3 focus:border-primary-100"
+                        className="otp-small w-10 h-10 text-center text-lg border-2 border-gray-200 rounded-lg focus:outline-none focus:border-3 focus:border-primary-100"
                         dir="rtl"
                     />
                 ))}

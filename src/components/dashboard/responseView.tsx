@@ -18,8 +18,9 @@ export default function ResponseView() {
             <Image
                     src={image}
                     alt="عکس پیش فاکتور"
-                    className="w-full max-w-full h-auto rounded-lg object-cover"
+                    className="w-full max-w-[300px] h-auto rounded-lg object-cover self-center"
                 />
         </div>
+
     )
 }

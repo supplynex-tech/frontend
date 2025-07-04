@@ -34,7 +34,7 @@
 
   --color-danger: #B21807;
 
-  
+
 }
 
 html {
@@ -110,5 +110,10 @@ body {
 @media (max-width: 300px) {
   .grid-cols-xs-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .otp-small {
+    width: 1.75rem; 
+    height: 1.75rem;
   }
 }

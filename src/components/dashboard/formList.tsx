@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { ResponseModal } from "../base/modal";
 import Link from "next/link";
-import { PrimaryNavigationButton } from "../base/button";
 import Pagination from "../base/pagination";
 
 export default function FormList() {
@@ -42,12 +41,6 @@ export default function FormList() {
                 فرم قبلی
             </Link>
         );
-    };
-
-    const getInvoiceClass = (status: string) => {
-        return status === "بررسی شده"
-            ? "text-primary-400 font-medium hover:underline cursor-pointer"
-            : "text-primary-200 font-medium";
     };
 
     const getResponseText = (status: string, onOpenModal: () => void) => {

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 
@@ -16,6 +16,7 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
     const hasAnimated = useRef(false);
 
     useEffect(() => {
+        const node = containerRef.current; // ✅ ذخیره ref به متغیر محلی (حل ارور)
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && !hasAnimated.current) {
@@ -26,12 +27,10 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
             { threshold: 0.3 }
         );
 
-        if (containerRef.current) {
-            observer.observe(containerRef.current);
-        }
+        if (node) observer.observe(node);
 
         return () => {
-            if (containerRef.current) observer.unobserve(containerRef.current);
+            if (node) observer.unobserve(node);
         };
     }, [end]);
 
@@ -57,7 +56,6 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
     return (
         <section ref={containerRef} className="flex flex-col items-center text-center space-y-1">
             <div className="text-4xl font-bold text-primary-700">
-                {/*Prefix place changed because of rtl direction*/}
                 {count}
                 {suffix}
                 {prefix}
@@ -69,7 +67,7 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
 }
 
 export default function Customers() {
-    const counters = [
+    const counters: CounterProps[] = [
         {
             end: 5000,
             label: "درخواست ثبت‌شده",
@@ -105,15 +103,11 @@ export default function Customers() {
     ];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 py-10 md:py-20 px-6 md:px-20 bg-gray-50 w-[100%]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 py-10 md:py-20 px-6 md:px-20 bg-gray-50 w-full">
             {counters.map((item, index) => (
                 <SingleCounter
                     key={index}
-                    end={item.end}
-                    label={item.label}
-                    detail={item.detail}
-                    prefix={item.prefix}
-                    suffix={item.suffix}
+                    {...item}
                 />
             ))}
         </div>
