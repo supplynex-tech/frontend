@@ -80,10 +80,8 @@ export default function FormView() {
 
             </div>
 
-            <div className="flex justify-center mt-8">
-                <div className="w-[150px]">
-                    <PrimaryActionButton title="ثبت" type="submit" onClick={handleSubmit} />
-                </div>
+            <div className="flex justify-center">
+                <PrimaryActionButton title="ثبت" type="submit" onClick={handleSubmit} className="px-20" />
             </div>
 
         </>

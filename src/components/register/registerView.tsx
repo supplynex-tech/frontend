@@ -14,8 +14,8 @@ export default function RegisterView() {
     };
 
     return (
-        <>
-            <h2 className="font-bold text-2xl self-center mb-6">ثبت نام</h2>
+        <div className="flex flex-col gap-3 sm:gap-5 pt-3">
+            <h2 className="font-bold text-xl">احراز هویت</h2>
             {
                 step === "phone" ? (
                     <PhoneStep onSubmit={handlePhoneSubmit} />
@@ -23,6 +23,6 @@ export default function RegisterView() {
                     <OtpStep phone={phone} />
                 )
             }
-        </>
+        </div>
     );
 }

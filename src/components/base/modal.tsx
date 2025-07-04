@@ -47,9 +47,7 @@ export function RegisterModal({ onClose }: { onClose: () => void }) {
 
     return (
         <Modal onClose={onClose}>
-            <div className="flex flex-col rounded-xl px-5 py-10 w-[400px]">
                 <RegisterView />
-            </div>
         </Modal>
     );
 }

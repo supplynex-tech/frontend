@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/landing/Navbar";
-import Footer from "@/components/landing/Footer";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -27,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <head>
+        <link rel="icon" href="/favicon.ico" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.js"></script>
       </head>

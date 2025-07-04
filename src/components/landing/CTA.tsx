@@ -5,7 +5,7 @@ import { PrimaryNavigationButton } from "../base/button";
 
 const data = {
     text: "اگر دنبال خرید هوشمندانه تر هستید، همین حالا نیاز خود را ثبت کنید.",
-    button: { title: 'شروع', href: '/form' },
+    button: "شروع",
 }
 
 
@@ -23,9 +23,7 @@ export default function CTA() {
                         {data.text}
                     </p>
                 </motion.section>
-                <div className="w-[50%]">
-                    <PrimaryNavigationButton title={data.button.title} href={data.button.href} />
-                </div>
+                <PrimaryNavigationButton title={data.button} href="./form" className="w-[200px] sm:w-[300px]" />
             </div>
         </section>
     );

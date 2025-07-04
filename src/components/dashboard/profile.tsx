@@ -2,16 +2,16 @@ import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
 
 const userData = {
-    text: { name: "علی عزیز", message: "خوش آمدی." },
+    text: "خوش آمدید.",
     phone: { title: "شماره همراه", number: "09337827049" },
     stats: [
         {
             count: 4,
-            label: "همه ی فرم ها",
-            color: "primary-400",
+            label: "شروع نشده",
+            color: "primary-500",
         },
         {
-            count: 2,
+            count: 1,
             label: "در حال بررسی",
             color: "secondary-500",
         },
@@ -38,11 +38,11 @@ export default function Profile() {
             />
             <div className="text-center pt-5">
                 <p className="text-primary-700 text-xl font-semibold mb-3">
-                    {userData.text.name} {userData.text.message}
+                    {userData.text}
                 </p>
                 <span className="text-gray-600 text-md">{userData.phone.title}: {userData.phone.number}</span>
             </div>
-            <div className="grid grid-cols-3 gap-5 mt-5 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-5 w-full">
                 {userData.stats.map((item, index) => (
                     <div
                         key={index}

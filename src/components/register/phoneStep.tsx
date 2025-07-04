@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import BaseInput from "../base/input/input";
-import { HugeButton, RegisterButton, SubmitButton } from "../base/button";
+import { PrimaryActionButton } from "../base/button";
 
 type Props = {
     onSubmit: (phone: string) => void;
@@ -23,7 +23,7 @@ export default function PhoneStep({ onSubmit }: Props) {
 
     return (
         <>
-            <p className="text-center text-gray-600">
+            <p className="text-gray-600">
                 شماره همراه خود را وارد کنید.
             </p>
             <BaseInput
@@ -34,10 +34,7 @@ export default function PhoneStep({ onSubmit }: Props) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             />
-
-            <div className="mt-15 w-[50%] flex self-center">
-                <RegisterButton title="تأیید" onClick={handleSubmit} />
-            </div>
+            <PrimaryActionButton type="submit" title="تأیید" onClick={handleSubmit} className="px-10 mt-3" />
         </>
     );
 }

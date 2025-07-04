@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { TinyButton } from '../base/button'
+import { PrimaryNavigationButton } from '../base/button'
 import Image from 'next/image'
 import logoImage from "@/../public/assets/images/logo.png";
 
@@ -18,18 +18,23 @@ export default function Navbar() {
     }
   }, [pathname])
 
-  const navItems = [
-    { title: 'خانه', href: '/' },
-    { title: 'آموزش', href: '/#instructions' },
-    { title: 'سوالات متداول', href: '/#questions' },
-    { title: 'درباره ما', href: '/about' },
-  ]
+  const data = {
+    navItems: [
+      { title: 'خانه', href: '/' },
+      { title: 'آموزش', href: '/#instructions' },
+      { title: 'سوالات متداول', href: '/#questions' },
+      { title: 'درباره ما', href: '/about' },
+    ]
+    ,
+    button: "ورود"
+  }
+
+
 
   return (
     <nav className="fixed w-full z-20 top-0 start-0 lg:py-5">
       <div className="bg-gray-50 lg:rounded-lg lg:w-[80%] flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3">
-          {/* <span className="self-center text-2xl font-semibold whitespace-nowrap">SupplyNex</span> */}
           <Image
             src={logoImage}
             alt="عکس کاربر"
@@ -38,7 +43,8 @@ export default function Navbar() {
         </Link>
 
         <div className="flex md:order-2 space-x-3 md:space-x-0">
-          <TinyButton title="ورود" href="/dashboard" />
+          <PrimaryNavigationButton title={data.button} href="/dashboard" className="hidden md:flex justify-center w-[150px]" />
+
           <button
             type="button"
             className="relative w-10 h-10 flex flex-col justify-center items-center md:hidden"
@@ -51,8 +57,8 @@ export default function Navbar() {
         </div>
 
         <div className={`${isOpen ? 'block' : 'hidden'} w-full md:flex md:w-auto md:order-1`}>
-          <ul className="flex flex-col md:flex-row md:space-x-8 md:mt-0 font-medium">
-            {navItems.map((item, index) => {
+          <ul className="flex flex-col  py-5 md:py-0 md:flex-row md:space-x-8 md:mt-0 font-medium">
+            {data.navItems.map((item, index) => {
               const isActive =
                 pathname === item.href ||
                 (item.href.startsWith('/#') && pathname === '/' && hash === item.href.replace('/', ''))
@@ -62,8 +68,8 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     className={`block py-2 px-3 rounded-sm transition-all duration-200 ${isActive && !item.href.startsWith('/#')
-                        ? 'text-secondary-500 font-semibold'
-                        : 'text-gray-600'
+                      ? 'text-secondary-500 font-semibold'
+                      : 'text-gray-600'
                       } ${!item.href.startsWith('/#') ? 'hover:text-primary-400' : ''}`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -73,6 +79,7 @@ export default function Navbar() {
               )
             })}
           </ul>
+          <PrimaryNavigationButton title={data.button} href="/dashboard" className='md:hidden w-full' />
         </div>
       </div>
     </nav>
