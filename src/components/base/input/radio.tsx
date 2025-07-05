@@ -6,23 +6,21 @@ const options = [
   { id: "option2", label: "آنلاین" },
 ];
 
-type Props = {
+interface RadioProps {
   label: string;
   name: string;
   multi?: boolean;
 };
 
-export default function Radio({ label, name, multi = true }: Props) {
+export default function Radio({ label, name, multi = true }: RadioProps) {
   const [selected, setSelected] = useState<string[]>([]);
 
   const handleChange = (id: string) => {
     if (multi) {
-      // حالت چندتایی: اضافه/حذف
       setSelected((prev) =>
         prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
       );
     } else {
-      // حالت تک‌انتخاب
       setSelected([id]);
     }
   };

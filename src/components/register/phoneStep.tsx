@@ -4,28 +4,29 @@ import { useState } from "react";
 import BaseInput from "../base/input/input";
 import { PrimaryActionButton } from "../base/button";
 
-type Props = {
+interface PhoneStepProps {
     onSubmit: (phone: string) => void;
 };
 
-export default function PhoneStep({ onSubmit }: Props) {
+export default function PhoneStep({ onSubmit }: PhoneStepProps) {
     const [phone, setPhone] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = () => {
-        const isValidPhone = /^09\d{9}$/.test(phone);
+        const trimmedPhone = phone.trim();
+        const isValidPhone = /^09\d{9}$/.test(trimmedPhone);
         if (!isValidPhone) {
-            alert("شماره تماس معتبر وارد کنید");
+            setError("شماره تماس معتبر وارد کنید");
             return;
         }
 
-        onSubmit(phone); // تغییر مرحله در RegisterPage انجام می‌گیرد
+        setError("");
+        onSubmit(trimmedPhone);
     };
 
     return (
         <>
-            <p className="text-gray-600">
-                شماره همراه خود را وارد کنید.
-            </p>
+            <p className="text-gray-600">شماره همراه خود را وارد کنید.</p>
             <BaseInput
                 label="شماره همراه"
                 name="phone"
@@ -34,7 +35,13 @@ export default function PhoneStep({ onSubmit }: Props) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             />
-            <PrimaryActionButton type="submit" title="تأیید" onClick={handleSubmit} className="px-10 mt-3" />
+            {error && <p className="text-danger text-sm mt-2">{error}</p>}
+            <PrimaryActionButton
+                type="submit"
+                title="تأیید"
+                onClick={handleSubmit}
+                className="px-10 mt-3"
+            />
         </>
     );
 }

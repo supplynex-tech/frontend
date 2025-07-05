@@ -3,32 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 import InputBox from "./inputBox";
 
-type Props = {
+interface OtpInputProps {
     length?: number;
     label: string
     name: string
 };
 
-export default function OtpInput({ length = 6, label, name }: Props) {
+export default function OtpInput({ length = 6, label, name }: OtpInputProps) {
     const [values, setValues] = useState<string[]>(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
     const handleChange = (index: number, value: string) => {
-        const onlyNumber = value.replace(/[^\d۰-۹]/g, ""); // فقط عدد
+        const onlyNumber = value.replace(/[^\d۰-۹]/g, "");
 
         if (onlyNumber === "") return;
 
         const newValues = [...values];
-        newValues[index] = onlyNumber.slice(-1); // فقط یک رقم
+        newValues[index] = onlyNumber.slice(-1);
 
-        // پاک کردن خانه‌های بعدی
         for (let i = index + 1; i < length; i++) {
             newValues[i] = "";
         }
 
         setValues(newValues);
 
-        // فوکوس به خانه بعدی
         if (index < length - 1) {
             inputsRef.current[index + 1]?.focus();
         }
@@ -39,7 +37,6 @@ export default function OtpInput({ length = 6, label, name }: Props) {
             const newValues = [...values];
             newValues[index] = "";
 
-            // پاک کردن خانه‌های بعدی
             for (let i = index + 1; i < length; i++) {
                 newValues[i] = "";
             }
@@ -53,7 +50,6 @@ export default function OtpInput({ length = 6, label, name }: Props) {
     };
 
     useEffect(() => {
-        // فوکوس به اولین خانه در بارگذاری
         inputsRef.current[0]?.focus();
     }, []);
 

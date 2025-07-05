@@ -13,12 +13,12 @@ const monthNames = [
   "دی", "بهمن", "اسفند"
 ];
 
-interface Props {
-  value?: string; // YYYY/MM/DD
+interface ScrollingDatePickerProps {
+  value?: string;
   onChange?: (val: string) => void;
 }
 
-export default function ScrollingDatePicker({ value, onChange }: Props) {
+export default function ScrollingDatePicker({ value, onChange }: ScrollingDatePickerProps) {
   const today = toJalaali(new Date());
   const initialYear = value ? parseInt(value.split("/")[0], 10) : today.jy;
   const initialMonth = value ? parseInt(value.split("/")[1], 10) : today.jm;
@@ -35,13 +35,11 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
   const years = range(today.jy - 100, today.jy + 10);
   const days = range(1, jalaaliMonthLength(year, month));
 
-  // Update parent value
   useEffect(() => {
     const final = `${year}/${String(month).padStart(2, "0")}/${String(day).padStart(2, "0")}`;
     onChange?.(final);
   }, [year, month, day, onChange]);
 
-  // Scroll to center selected items
   useEffect(() => {
     const scrollToCenter = (container: HTMLElement | null, index: number) => {
       if (!container) return;
@@ -57,7 +55,6 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
 
   return (
     <div dir="ltr" className="flex z-50 absolute gap-4 items-start bg-gray-50 p-4 rounded-xl shadow-md w-full mx-auto mt-4">
-      {/* سال */}
       <div ref={yearRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:w-1
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200   
@@ -74,8 +71,6 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
           </div>
         ))}
       </div>
-
-      {/* ماه */}
       <div ref={monthRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:w-1
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200   
@@ -92,8 +87,6 @@ export default function ScrollingDatePicker({ value, onChange }: Props) {
           </div>
         ))}
       </div>
-
-      {/* روز */}
       <div ref={dayRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:w-1
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200   

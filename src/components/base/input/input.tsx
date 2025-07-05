@@ -1,8 +1,6 @@
-// components/form/BaseInput.tsx
-
 import InputBox from "./inputBox";
 
-type BaseInputProps = {
+interface BaseInputProps {
     label: string;
     name: string;
     type?: string;

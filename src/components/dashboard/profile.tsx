@@ -3,7 +3,39 @@
 import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
 
-const userData = {
+interface Phone {
+    title: string;
+    number: string;
+}
+
+interface StatItem {
+    count: number;
+    label: string;
+    color: keyof typeof colorClasses;
+}
+
+interface UserData {
+    text: string;
+    phone: Phone;
+    stats: StatItem[];
+}
+
+const colorClasses = {
+    "primary-500": {
+        border: "border-primary-500",
+        text: "text-primary-500",
+    },
+    "secondary-500": {
+        border: "border-secondary-500",
+        text: "text-secondary-500",
+    },
+    "emerald-600": {
+        border: "border-emerald-600",
+        text: "text-emerald-600",
+    },
+} as const;
+
+const userData: UserData = {
     text: "خوش آمدید.",
     phone: { title: "شماره همراه", number: "09337827049" },
     stats: [
@@ -23,22 +55,6 @@ const userData = {
             color: "emerald-600",
         },
     ],
-};
-
-// Mapping برای رنگ‌ها
-const colorClasses: Record<string, { border: string; text: string }> = {
-    "primary-500": {
-        border: "border-primary-500",
-        text: "text-primary-500",
-    },
-    "secondary-500": {
-        border: "border-secondary-500",
-        text: "text-secondary-500",
-    },
-    "emerald-600": {
-        border: "border-emerald-600",
-        text: "text-emerald-600",
-    },
 };
 
 export default function Profile() {

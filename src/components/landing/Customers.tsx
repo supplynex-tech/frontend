@@ -16,7 +16,7 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
     const hasAnimated = useRef(false);
 
     useEffect(() => {
-        const node = containerRef.current; // ✅ ذخیره ref به متغیر محلی (حل ارور)
+        const node = containerRef.current;
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && !hasAnimated.current) {

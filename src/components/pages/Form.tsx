@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { SecondaryIconButton, SecondaryNavigationButton } from "../base/button";
@@ -8,16 +8,21 @@ import FormView from "../form/formView";
 export default function FormPage() {
     return (
         <DashboardWrapper>
-            <div className="flex flex-row justify-between">
-                <h2 className="text-2xl font-bold pb-5 md:pb-0">فرم اول</h2>
-                <div>
-                    <SecondaryNavigationButton title="بازگشت" href="/dashboard" className="hidden md:block" />
+            <div className="flex flex-row justify-between items-center pb-5 md:pb-0">
+                <h2 className="text-2xl font-bold">فرم اول</h2>
+                <div className="flex items-center gap-2">
+                    <SecondaryNavigationButton
+                        title="بازگشت"
+                        href="/dashboard"
+                        className="hidden md:block"
+                    />
                     <SecondaryIconButton href="/dashboard" className="md:hidden">
                         <FaArrowLeft />
                     </SecondaryIconButton>
                 </div>
             </div>
+
             <FormView />
-        </DashboardWrapper >
-    )
+        </DashboardWrapper>
+    );
 }

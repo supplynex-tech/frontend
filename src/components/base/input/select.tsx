@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import InputBox from "./inputBox";
 
-type Props = {
+interface SelectProps {
   label: string;
   name: string;
 };
 
-export default function Select({ label, name }: Props) {
+export default function Select({ label, name }: SelectProps) {
   const options = ["نایک", "آدیداس", "پوما"];
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);

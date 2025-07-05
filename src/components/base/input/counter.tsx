@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-type CounterProps = {
+interface CounterProps {
     label: string;
     name: string;
     max: number;

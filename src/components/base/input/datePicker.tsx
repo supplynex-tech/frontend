@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import ScrollingDatePicker from "./scrollingDatePicker";
 import InputBox from "./inputBox";
 
-export default function DateInput({ label, name }) {
+interface DateInputProps {
+    label: string;
+    name: string;
+};
+
+export default function DateInput({ label, name }: DateInputProps) {
     const [selectedDate, setSelectedDate] = useState("");
     const [open, setOpen] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);

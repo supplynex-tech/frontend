@@ -4,17 +4,19 @@ import { useEffect } from "react";
 import { motion, stagger, useAnimate } from "motion/react";
 import { cn } from "../../../lib/utils";
 
+interface AnimatedTextProps {
+  words: string;
+  className?: string;
+  filter?: boolean;
+  duration?: number;
+}
+
 export const AnimatedText = ({
   words,
   className,
   filter = true,
   duration = 0.5,
-}: {
-  words: string;
-  className?: string;
-  filter?: boolean;
-  duration?: number;
-}) => {
+}: AnimatedTextProps) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
 
@@ -30,7 +32,7 @@ export const AnimatedText = ({
         delay: stagger(0.2),
       }
     );
-  }, [animate, duration, filter]); // ✅ درست‌ترین دیپندنسی
+  }, [animate, duration, filter]);
 
   const renderWords = () => (
     <motion.div ref={scope}>

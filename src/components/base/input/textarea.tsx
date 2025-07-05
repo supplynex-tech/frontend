@@ -2,7 +2,7 @@
 
 import InputBox from "./inputBox";
 
-type BaseInputProps = {
+interface TextareaProps {
     label: string;
     name: string;
     type?: string;
@@ -20,7 +20,7 @@ export default function Textarea({
     value,
     onChange,
     required = false,
-}: BaseInputProps) {
+}: TextareaProps) {
     return (
         <InputBox label={label} name={name}>
             <textarea

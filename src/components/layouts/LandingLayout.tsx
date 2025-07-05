@@ -1,7 +1,11 @@
 import Navbar from "../landing/Navbar";
 import Footer from "../landing/Footer";
 
-export default function LandingLayout({ children }: { children: React.ReactNode }) {
+interface LandingLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function LandingLayout({ children }: LandingLayoutProps) {
   return (
     <>
       <Navbar />
