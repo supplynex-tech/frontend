@@ -8,11 +8,10 @@ import {useEffect, useState} from "react";
 import { getForm } from "@/services/api/dashboard";
 import {FormResult} from "@/types/api";
 
-interface FormPageProps {
-  id: string;
-}
 
-export default function FormPage({id}: FormPageProps) {
+export default function FormPage({id}: {
+    id: string;
+}) {
     const [formData, setFormData] = useState<FormResult>();
 
     useEffect(() => {
