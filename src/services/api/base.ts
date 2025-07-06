@@ -25,7 +25,11 @@ api.interceptors.response.use(
             originalRequest._retry = true
 
             const refresh = await storage.getItem('refreshToken')
-            if (!refresh) return Promise.reject(error)
+            if (!refresh) {
+                await storage.deleteItem('accessToken');
+                await storage.deleteItem('refreshToken');
+                window.location.href = '/register';
+            }
 
             try {
                 const res = await axios.post<authTypes>('http://192.168.1.140:8000/api/v1/accounting/refresh-token/', {
@@ -39,7 +43,7 @@ api.interceptors.response.use(
             } catch (refreshError) {
                 await storage.deleteItem('accessToken');
                 await storage.deleteItem('refreshToken');
-                return Promise.reject(refreshError)
+                window.location.href = '/register';
             }
         }
 
