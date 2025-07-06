@@ -12,7 +12,7 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-2">
                     <PrimaryNavigationButton
                         title="ایجاد فرم جدید"
-                        href="/form"
+                        href="/form/default"
                         className="hidden md:flex"
                     />
                     <PrimaryIconButton href="/form" className="md:hidden">

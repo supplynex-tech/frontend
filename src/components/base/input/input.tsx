@@ -1,35 +1,26 @@
+import { UseFormRegisterReturn } from "react-hook-form";
 import InputBox from "./inputBox";
 
 interface BaseInputProps {
     label: string;
-    name: string;
+    register: UseFormRegisterReturn<any>;
     type?: string;
     placeholder?: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    required?: boolean;
 };
 
 export default function BaseInput({
-    name,
     label,
+    register,
     type = "text",
     placeholder = "",
-    value,
-    onChange,
-    required = false,
 }: BaseInputProps) {
     return (
-        <InputBox label={label} name={name}>
+        <InputBox label={label} name={register.name}>
             <input
-                id={name}
-                name={name}
                 type={type}
-                required={required}
                 placeholder={placeholder}
-                value={value}
-                onChange={onChange}
                 className="w-full mt-2 border-2 placeholder-gray-400 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-primary-100 focus:ring-1 focus:ring-primary-100"
+                {...register}
             />
         </InputBox>
     );

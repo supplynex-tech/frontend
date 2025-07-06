@@ -68,7 +68,7 @@ export default function FormView() {
             {showModal && <RegisterModal onClose={() => setShowModal(false)} />}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 pt-5 py-15">
-                <BaseInput
+                {/* <BaseInput
                     label={formConfig.phone.label}
                     name="phone"
                     placeholder={formConfig.phone.placeholder}
@@ -84,7 +84,7 @@ export default function FormView() {
                     label={formConfig.title.label}
                     name="title"
                     placeholder={formConfig.title.placeholder}
-                />
+                /> */}
                 <UploadFile label={formConfig.attachment.label} name="attachment" />
                 <Select label={formConfig.select.label} name="select" />
                 <DatePicker label={formConfig.date.label} name="date" />
@@ -105,7 +105,6 @@ export default function FormView() {
                 <PrimaryActionButton
                     title="ثبت"
                     type="submit"
-                    onClick={handleSubmit}
                     className="px-20"
                 />
             </div>

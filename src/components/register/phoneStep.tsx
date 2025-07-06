@@ -1,47 +1,39 @@
 "use client";
 
-import { useState } from "react";
 import BaseInput from "../base/input/input";
 import { PrimaryActionButton } from "../base/button";
+import { Register } from "@/validation/register";
+import { FieldErrors, UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 
 interface PhoneStepProps {
-    onSubmit: (phone: string) => void;
+    onSubmit: (data: Register) => void;
+    register: UseFormRegister<Register>;
+    handleSubmit: UseFormHandleSubmit<Register>
+    errors: FieldErrors<Register>
 };
 
-export default function PhoneStep({ onSubmit }: PhoneStepProps) {
-    const [phone, setPhone] = useState("");
-    const [error, setError] = useState("");
-
-    const handleSubmit = () => {
-        const trimmedPhone = phone.trim();
-        const isValidPhone = /^09\d{9}$/.test(trimmedPhone);
-        if (!isValidPhone) {
-            setError("شماره تماس معتبر وارد کنید");
-            return;
-        }
-
-        setError("");
-        onSubmit(trimmedPhone);
-    };
+export default function PhoneStep({ onSubmit, register, handleSubmit, errors }: PhoneStepProps) {
 
     return (
-        <>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <p className="text-gray-600">شماره همراه خود را وارد کنید.</p>
+
             <BaseInput
                 label="شماره همراه"
-                name="phone"
                 type="tel"
                 placeholder="09121234567"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                register={register("phoneNumber")}
             />
-            {error && <p className="text-danger text-sm mt-2">{error}</p>}
+
+            {errors.phoneNumber && (
+                <p className="text-danger text-sm mt-2">{errors.phoneNumber.message}</p>
+            )}
+
             <PrimaryActionButton
                 type="submit"
                 title="تأیید"
-                onClick={handleSubmit}
                 className="px-10 mt-3"
             />
-        </>
+        </form>
     );
 }

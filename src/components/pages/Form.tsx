@@ -4,8 +4,21 @@ import { FaArrowLeft } from "react-icons/fa";
 import { SecondaryIconButton, SecondaryNavigationButton } from "../base/button";
 import DashboardWrapper from "../dashboard/wrapper";
 import FormView from "../form/formView";
+import { useEffect } from "react";
+import { getForm } from "@/services/api/dashboard";
 
-export default function FormPage() {
+interface FormPageProps {
+  id: string;
+}
+
+export default function FormPage({id}: FormPageProps) {
+    useEffect(() => {
+        getForm(id).then(result => {
+            console.log(result)
+        })
+    }, []);
+
+
     return (
         <DashboardWrapper>
             <div className="flex flex-row justify-between items-center pb-5 md:pb-0">

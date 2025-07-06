@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
+import { use, useEffect, useState } from "react";
+import { storage } from "@/services/localstorage";
+import { getDashboardOverview } from "@/services/api/dashboard";
 
 interface Phone {
     title: string;
@@ -35,29 +38,63 @@ const colorClasses = {
     },
 } as const;
 
-const userData: UserData = {
-    text: "خوش آمدید.",
-    phone: { title: "شماره همراه", number: "09337827049" },
-    stats: [
-        {
-            count: 4,
-            label: "شروع نشده",
-            color: "primary-500",
-        },
-        {
-            count: 1,
-            label: "در حال بررسی",
-            color: "secondary-500",
-        },
-        {
-            count: 2,
-            label: "بررسی شده",
-            color: "emerald-600",
-        },
-    ],
-};
-
 export default function Profile() {
+    const [userData, setUserData] = useState<UserData>({
+        text: "خوش آمدید.",
+        phone: { title: "شماره همراه", number: "" },
+        stats: [
+            {
+                count: 0,
+                label: "شروع نشده",
+                color: "primary-500",
+            },
+            {
+                count: 0,
+                label: "در حال بررسی",
+                color: "secondary-500",
+            },
+            {
+                count: 0,
+                label: "بررسی شده",
+                color: "emerald-600",
+            },
+        ],
+    });
+
+    useEffect(() => {
+        storage.getItem("phone_number").then(phoneNumber => {
+            setUserData((prev) => ({
+                ...prev,
+                phone: {
+                    ...prev.phone,
+                    number: phoneNumber || ""
+                },
+            }));
+        })
+        getDashboardOverview().then(result => {
+            setUserData((prev) => ({
+                ...prev,
+                stats: [
+                    {
+                        count: result.no_answers,
+                        label: "شروع نشده",
+                        color: "primary-500",
+                    },
+                    {
+                        count: result.pending,
+                        label: "در حال بررسی",
+                        color: "secondary-500",
+                    },
+                    {
+                        count: result.finished,
+                        label: "بررسی شده",
+                        color: "emerald-600",
+                    },
+                ],
+            }));
+        })
+    }, []);
+
     return (
         <section className="flex flex-col items-center rounded-xl max-w-md mx-auto">
             <Image src={userImage} alt="عکس کاربر" className="h-20 w-20" />

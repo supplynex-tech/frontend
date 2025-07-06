@@ -6,7 +6,6 @@ import { ReactNode } from "react";
 interface PrimaryButtonProps {
     title: string;
     type: "button" | "submit" | "reset";
-    onClick: () => void;
     className?: string;
 }
 
@@ -18,10 +17,9 @@ interface SecondaryButtonProps {
     children?: ReactNode;
 }
 
-export function PrimaryActionButton({ title, type, onClick, className = "" }: PrimaryButtonProps) {
+export function PrimaryActionButton({ title, type, className = "" }: PrimaryButtonProps) {
     return (
         <button
-            onClick={onClick}
             type={type}
             className={`px-6 py-2 rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-md border-0 text-gray-800
                   hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`}
@@ -31,10 +29,9 @@ export function PrimaryActionButton({ title, type, onClick, className = "" }: Pr
     )
 }
 
-export function SecondaryActionButton({ title, type, onClick, className }: PrimaryButtonProps) {
+export function SecondaryActionButton({ title, type, className }: PrimaryButtonProps) {
     return (
         <button
-            onClick={onClick}
             type={type}
             className={`px-6 py-2 rounded-lg bg-secondary-500 hover:bg-secondary-400 font-semibold sm:text-md border-0  text-gray-50
                   hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`}

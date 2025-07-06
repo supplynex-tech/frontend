@@ -26,3 +26,4 @@ export interface FormConfig {
   participants: { label: string; max: number };
   otp: { label: string };
 }
+
