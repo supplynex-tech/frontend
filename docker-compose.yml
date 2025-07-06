@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  run-react:
+    hostname: frontend
+    build: .
+    restart: always
+    networks:
+      - docker-crowd
+
+networks:
+  docker-crowd:
+    external: true
+
