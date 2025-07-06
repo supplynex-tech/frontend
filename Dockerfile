@@ -9,4 +9,4 @@ RUN npm install
 # Build
 COPY . .
 RUN npm run build
-CMD /bin/bash -c "npm run start"
+CMD npm run start
