@@ -1,36 +1,25 @@
 // components/form/BaseInput.tsx
 
 import InputBox from "./inputBox";
+import {UseFormRegisterReturn} from "react-hook-form";
 
 interface TextareaProps {
     label: string;
-    name: string;
-    type?: string;
     placeholder?: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    textarea?: boolean;
-    required?: boolean;
+    register: UseFormRegisterReturn<any>;
 };
 
 export default function Textarea({
-    label,
-    name,
-    placeholder = "",
-    value,
-    onChange,
-    required = false,
-}: TextareaProps) {
+                                     label,
+                                     register,
+                                     placeholder = "",
+                                 }: TextareaProps) {
     return (
-        <InputBox label={label} name={name}>
+        <InputBox label={label} name={register.name}>
             <textarea
-                id={name}
-                name={name}
+                {...register}
                 rows={5}
-                required={required}
                 placeholder={placeholder}
-                value={value}
-                onChange={onChange}
                 className="w-full mt-2 border-2 placeholder-gray-400 border-gray-200 px-3 py-2 rounded-lg focus:outline-none focus:border-primary-100 focus:ring-1 focus:ring-primary-100"
             />
         </InputBox>

@@ -4,17 +4,20 @@ import { FaArrowLeft } from "react-icons/fa";
 import { SecondaryIconButton, SecondaryNavigationButton } from "../base/button";
 import DashboardWrapper from "../dashboard/wrapper";
 import FormView from "../form/formView";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { getForm } from "@/services/api/dashboard";
+import {FormResult} from "@/types/api";
 
 interface FormPageProps {
   id: string;
 }
 
 export default function FormPage({id}: FormPageProps) {
+    const [formData, setFormData] = useState<FormResult>();
+
     useEffect(() => {
         getForm(id).then(result => {
-            console.log(result)
+            setFormData(result)
         })
     }, []);
 
@@ -22,7 +25,7 @@ export default function FormPage({id}: FormPageProps) {
     return (
         <DashboardWrapper>
             <div className="flex flex-row justify-between items-center pb-5 md:pb-0">
-                <h2 className="text-2xl font-bold">فرم اول</h2>
+                <h2 className="text-2xl font-bold">{formData?.name}</h2>
                 <div className="flex items-center gap-2">
                     <SecondaryNavigationButton
                         title="بازگشت"
@@ -35,7 +38,7 @@ export default function FormPage({id}: FormPageProps) {
                 </div>
             </div>
 
-            <FormView />
+            <FormView formData={formData} />
         </DashboardWrapper>
     );
 }

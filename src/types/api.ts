@@ -5,7 +5,7 @@ export interface authTypes {
 }
 
 export interface overviewTypes {
-  no_answers: number;
+  no_answer: number;
   pending: number;
   finished: number
 }
@@ -26,7 +26,14 @@ export interface FormResult {
   image_result: string;
   description_result: string;
   previous_form_template_result: number;
+  next_form_template_result: number;
   created_time: string;
+}
+
+export interface FormQuestionOptions {
+  multi?: boolean;
+  items?: string[];
+  max?: number;
 }
 
 export interface FormQuestion {
@@ -34,7 +41,8 @@ export interface FormQuestion {
   title: string;
   placeholder: string;
   is_required: boolean;
-  type: "TEXT_INPUT";
+  type: "TEXT_INPUT" | "UPLOAD_FILE" | "SELECT" | "DATE_PICKER" | "RADIO" | "COUNTER" | "TEXTAREA";
+  options: FormQuestionOptions | string[]
 }
 
 export interface FormAnswer {

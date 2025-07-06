@@ -8,25 +8,32 @@ import { getUserFormList } from "@/services/api/dashboard";
 
 export default function FormList() {
     interface DashboardRowType {
+        id: number;
         name: string;
         status: string;
         previousForm: string | null;
         createdAt: string;
+        description: string;
+        nextFormID: number;
+        imageUrl: string;
     }
 
     interface DashboardContentType {
         totalCount: number;
-        pageCount: number;
         title: string;
         tableHeaders: string[];
         tableData: DashboardRowType[];
     }
 
     const [isModalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState<{nextFormID: number, description: string, imageUrl: string}>({
+        nextFormID: 0,
+        description: "",
+        imageUrl: ""
+    });
     const [pageNumber, setPageNumber] = useState(1);
     const [data, setData] = useState<DashboardContentType>({
         totalCount: 0,
-        pageCount: 0,
         title: "داشبورد",
         tableHeaders: ["نام", "وضعیت", "فرم قبلی", "تاریخ ایجاد", "پاسخ"],
         tableData: []
@@ -56,7 +63,7 @@ export default function FormList() {
         );
     };
 
-    const getResponseText = (status: string, onOpenModal: () => void) => {
+    const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
         switch (status) {
             case "PENDING":
                 return <span className="text-primary-200">مشاهده</span>;
@@ -70,7 +77,7 @@ export default function FormList() {
                     </span>
                 );
             case "NO_ANSWER":
-                return <Link href="/form" className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">شروع</Link>;
+                return <Link href={"/form/" + id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">شروع</Link>;
             default:
                 return <span className="text-gray-400">نامشخص</span>;
         }
@@ -78,21 +85,29 @@ export default function FormList() {
 
     useEffect(() => {
         getUserFormList(pageNumber).then(data => {
-            let formListData: DashboardRowType[] = []
+            const formListData: DashboardRowType[] = []
             data.results.map(data => formListData.push(
-                { name: data.name, status: data.status, previousForm: data.previous_form_template_result?.toString(), createdAt: data.created_time }
+                {
+                    id: data.id,
+                    name: data.name,
+                    status: data.status,
+                    previousForm: data.previous_form_template_result?.toString(),
+                    nextFormID: data.next_form_template_result,
+                    createdAt: data.created_time,
+                    description: data.description_result,
+                    imageUrl: data.image_result
+                }
             ))
             setData((prev) => ({
                 ...prev,
                 totalCount: data.count,
-                pageCount: data.results.length,
                 tableData: formListData,
             }));
             console.log(formListData)
 
         })
 
-    }, []);
+    }, [pageNumber]);
 
     return (
         <section className="pt-10">
@@ -130,7 +145,14 @@ export default function FormList() {
                                 </td>
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.createdAt}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
-                                    {getResponseText(row.status, () => setModalOpen(true))}
+                                    {getResponseText(row.status, () => {
+                                        setModalOpen(true);
+                                        setModalContent({
+                                            nextFormID: row.nextFormID,
+                                            description: row.description,
+                                            imageUrl: row.imageUrl,
+                                        });
+                                    }, row.id)}
                                 </td>
                             </tr>
                         ))}
@@ -138,9 +160,9 @@ export default function FormList() {
                 </table>
             </div>
             <div className="pt-5 relative flex flex-row justify-end">
-                <Pagination totalItems={data.totalCount} itemsPerPage={data.pageCount} currentPage={pageNumber} onPageChange={setPageNumber} />
+                <Pagination totalItems={data.totalCount} itemsPerPage={10} currentPage={pageNumber} onPageChange={setPageNumber} />
             </div>
-            {isModalOpen && <ResponseModal onClose={() => setModalOpen(false)} />}
+            {isModalOpen && <ResponseModal onClose={() => setModalOpen(false)} content={modalContent} />}
         </section>
     );
 }

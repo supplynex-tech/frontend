@@ -76,7 +76,7 @@ export default function Profile() {
                 ...prev,
                 stats: [
                     {
-                        count: result.no_answers,
+                        count: result.no_answer,
                         label: "شروع نشده",
                         color: "primary-500",
                     },

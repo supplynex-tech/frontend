@@ -1,14 +1,14 @@
-import { useRef } from "react";
+import {useRef} from "react";
 import RegisterView from "../register/registerView";
 import ResponseView from "../dashboard/responseView";
-import { FaTimes } from "react-icons/fa";
+import {FaTimes} from "react-icons/fa";
 
 interface ModalProps {
     onClose: () => void;
     children: React.ReactNode;
 }
 
-export function Modal({ onClose, children }: ModalProps) {
+export function Modal({onClose, children}: ModalProps) {
     const overlayRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -29,7 +29,7 @@ export function Modal({ onClose, children }: ModalProps) {
                     className="absolute top-3 left-3 text-gray-500 hover:text-gray-700"
                     aria-label="بستن"
                 >
-                    <FaTimes className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-colors duration-200" />
+                    <FaTimes className="w-5 h-5 text-gray-400 hover:text-gray-500 transition-colors duration-200"/>
                 </button>
 
                 {children}
@@ -39,21 +39,22 @@ export function Modal({ onClose, children }: ModalProps) {
 }
 
 
-
-
-export function RegisterModal({ onClose }: { onClose: () => void }) {
+export function RegisterModal({onClose}: { onClose: () => void }) {
 
     return (
         <Modal onClose={onClose}>
-            <RegisterView />
+            <RegisterView/>
         </Modal>
     );
 }
 
-export function ResponseModal({ onClose }: { onClose: () => void }) {
+export function ResponseModal({onClose, content}: {
+    onClose: () => void,
+    content: { nextFormID: number, description: string, imageUrl: string }
+}) {
     return (
         <Modal onClose={onClose}>
-            <ResponseView />
+            <ResponseView content={content} />
         </Modal>
     );
 }

@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 interface CounterProps {
     label: string;
-    name: string;
-    max: number;
-};
+    register: UseFormRegisterReturn<any>;
+    max?: number;
+}
 
-export default function Counter({ label, name, max }: CounterProps) {
+export default function Counter({ label, register, max=100 }: CounterProps) {
     const [value, setValue] = useState(0);
 
     const increase = () => {
@@ -19,11 +20,24 @@ export default function Counter({ label, name, max }: CounterProps) {
         if (value > 0) setValue((prev) => prev - 1);
     };
 
+    useEffect(() => {
+        register.onChange({
+            target: { value, name: register.name },
+        });
+    }, [value, register]);
+
     return (
         <div className="pt-6">
-            <label htmlFor={name} className="block text-md font-medium text-gray-600 mb-2">
+            <label htmlFor={register.name} className="block text-md font-medium text-gray-600 mb-2">
                 {label}
             </label>
+
+            <input
+                type="hidden"
+                {...register}
+                value={value}
+                readOnly
+            />
 
             <div className="flex items-center border-2 border-gray-200 rounded-lg overflow-hidden w-[150px]">
                 <button
