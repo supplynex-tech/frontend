@@ -1,5 +1,5 @@
 import { FormResult, overviewTypes, PaginatedFormResponse } from "@/types/api"
-import { callApiWithOutToast, callApiWithToast } from "./base"
+import { callApiWithOutToast } from "./base"
 
 export const getDashboardOverview = async (): Promise<overviewTypes> => {
     try {

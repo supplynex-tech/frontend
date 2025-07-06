@@ -1,5 +1,4 @@
 import { authTypes } from "@/types/api"
-import { storage } from "../localstorage"
 import { Register } from "@/validation/register";
 import { callApiWithToast } from "./base";
 

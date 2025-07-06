@@ -1,4 +1,3 @@
-import {Register} from "@/validation/register";
 import {callApiWithToast} from "@/services/api/base";
 import {FormValidation} from "@/validation/form";
 
