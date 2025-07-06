@@ -1,6 +1,6 @@
 import FormPage from "@/components/pages/Form";
 
-export interface PageProps {
+interface PageProps {
     params: { id: string };
 };
 
