@@ -62,15 +62,14 @@ export default function Profile() {
     });
 
     useEffect(() => {
-        storage.getItem("phone_number").then(phoneNumber => {
-            setUserData((prev) => ({
-                ...prev,
-                phone: {
-                    ...prev.phone,
-                    number: phoneNumber || ""
-                },
-            }));
-        })
+        const phoneNumber = storage.getItem("phone_number")
+        setUserData((prev) => ({
+            ...prev,
+            phone: {
+                ...prev.phone,
+                number: phoneNumber || ""
+            },
+        }));
         getDashboardOverview().then(result => {
             setUserData((prev) => ({
                 ...prev,

@@ -21,7 +21,7 @@ export default function PhoneStep({ onSubmit, register, handleSubmit, errors }: 
             <BaseInput
                 label="شماره همراه"
                 type="tel"
-                placeholder="09121234567"
+                placeholder="9121234567"
                 register={register("phoneNumber")}
             />
 

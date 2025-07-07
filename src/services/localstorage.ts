@@ -1,11 +1,11 @@
 export const storage = {
-  setItem: async (key: string, value: string) => {
+  setItem: (key: string, value: string) => {
       localStorage.setItem(key, value);
   },
-  getItem: async (key: string): Promise<string | null> => {
+  getItem: (key: string): string | null => {
       return localStorage.getItem(key);
   },
-  deleteItem: async (key: string) => {
+  deleteItem: (key: string) => {
       localStorage.removeItem(key);
   },
 };

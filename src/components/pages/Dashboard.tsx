@@ -15,7 +15,7 @@ export default function DashboardPage() {
                         href="/form/default"
                         className="hidden md:flex"
                     />
-                    <PrimaryIconButton href="/form" className="md:hidden">
+                    <PrimaryIconButton href="/form/default" className="md:hidden">
                         <FaPlus />
                     </PrimaryIconButton>
                 </div>

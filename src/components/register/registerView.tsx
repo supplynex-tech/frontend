@@ -7,19 +7,16 @@ import PhoneStep from "../register/phoneStep";
 import OtpStep from "../register/otpStep";
 import { Register, RegisterSchema } from "@/validation/register";
 import { sendOTP, verifyPhoneNumber } from "@/services/api/register";
-import { useRouter } from 'next/navigation';
 import { storage } from "@/services/localstorage";
 
-export default function RegisterView() {
+export default function RegisterView({closeAction}: { closeAction: () => void }) {
     const [step, setStep] = useState<"phone" | "otp">("phone");
-    const router = useRouter();
-
 
     const {
         register,
         handleSubmit,
         watch,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm<Register>({
         resolver: zodResolver(RegisterSchema),
     });
@@ -28,18 +25,17 @@ export default function RegisterView() {
         try {
             await sendOTP(data)
             setStep("otp");
-        } catch (err) { }
+        } catch { }
     });
 
     const handleOTPSubmit = (async (data: Register) => {
         try {
-            let result = await verifyPhoneNumber(data)
+            const result = await verifyPhoneNumber(data)
             storage.setItem("accessToken", result.access)
             storage.setItem("refreshToken", result.refresh)
             storage.setItem("phone_number", result.phoneNumber)
-
-            router.push("/dashboard")
-        } catch (err) { }
+            closeAction()
+        } catch { }
     });
 
     return (

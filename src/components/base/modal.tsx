@@ -43,7 +43,7 @@ export function RegisterModal({onClose}: { onClose: () => void }) {
 
     return (
         <Modal onClose={onClose}>
-            <RegisterView/>
+            <RegisterView closeAction={onClose}/>
         </Modal>
     );
 }

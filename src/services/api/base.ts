@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { storage } from '../localstorage';
-import { authTypes } from '@/types/api';
+import {storage} from '../localstorage';
+import {authTypes} from '@/types/api';
 import format from "../../utils"
-import { Id, toast } from "react-toastify";
+import {Id, toast} from "react-toastify";
 
 const api = axios.create({
-    baseURL: 'http://185.8.175.13:3000/api/v1/',
+    baseURL: 'http://127.0.0.1:8000/api/v1/',
 })
 
 api.interceptors.request.use(
     async (config) => {
-        const token = await storage.getItem('accessToken')
+        const token = storage.getItem('accessToken')
         if (token) config.headers.Authorization = `Bearer ${token}`
         return config
     }
@@ -24,10 +24,11 @@ api.interceptors.response.use(
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true
 
-            const refresh = await storage.getItem('refreshToken')
+            const refresh = storage.getItem('refreshToken')
             if (!refresh) {
-                await storage.deleteItem('accessToken');
-                await storage.deleteItem('refreshToken');
+                storage.deleteItem('accessToken');
+                storage.deleteItem('refreshToken');
+                storage.deleteItem('phone_number');
                 window.location.href = '/register';
             }
 
@@ -35,14 +36,15 @@ api.interceptors.response.use(
                 const res = await axios.post<authTypes>('http://192.168.1.140:8000/api/v1/accounting/refresh-token/', {
                     refresh,
                 })
-                const { access: newAccess } = res.data
-                await storage.setItem('accessToken', newAccess || "")
+                const {access: newAccess} = res.data
+                storage.setItem('accessToken', newAccess || "")
 
                 originalRequest.headers.Authorization = `Bearer ${newAccess}`
                 return api(originalRequest)
             } catch (refreshError) {
-                await storage.deleteItem('accessToken');
-                await storage.deleteItem('refreshToken');
+                storage.deleteItem('accessToken');
+                storage.deleteItem('refreshToken');
+                storage.deleteItem('phone_number');
                 window.location.href = '/register';
             }
         }
@@ -57,6 +59,7 @@ export interface IPropsApiWithToast {
     successActionText: string;
     failedActionText: string;
     badActionText: string;
+    headers?: { [prop: string]: string };
 }
 
 export interface IPropsApiWithOutToast {
@@ -76,7 +79,8 @@ export async function callApiWithToast(
         method,
         successActionText,
         failedActionText,
-        badActionText
+        badActionText,
+        headers = {}
     }: IPropsApiWithToast, {
         dynamicUrl,
         body,
@@ -92,6 +96,7 @@ export async function callApiWithToast(
     }
     return await api({
         method: method,
+        headers: headers,
         url: format(url, ...dynamicUrl),
         params: params,
         data: body
@@ -141,12 +146,12 @@ export async function callApiWithOutToast(
         params
     }: ICallApiData
 ): Promise<any> {
-    if (!dynamicUrl){
+    if (!dynamicUrl) {
         dynamicUrl = []
     }
     return await api({
         method: method,
-        url: format(url, ...dynamicUrl ),
+        url: format(url, ...dynamicUrl),
         params: params,
         data: body
     }).then((response) => {

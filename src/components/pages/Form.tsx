@@ -36,8 +36,9 @@ export default function FormPage({id}: {
                     </SecondaryIconButton>
                 </div>
             </div>
-
-            <FormView formData={formData} />
+            {
+                formData && <FormView formData={formData} />
+            }
         </DashboardWrapper>
     );
 }

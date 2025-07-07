@@ -48,7 +48,7 @@ export default function Header() {
                         <div className="w-full py-10">
                             <PrimaryNavigationButton
                                 title={headerContent.button}
-                                href="/form"
+                                href="/form/default"
                                 className="w-full"
                             />
                         </div>
