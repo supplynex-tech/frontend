@@ -41,14 +41,14 @@ api.interceptors.response.use(
 
                 originalRequest.headers.Authorization = `Bearer ${newAccess}`
                 return api(originalRequest)
-            } catch (refreshError) {
-                storage.deleteItem('accessToken');
-                storage.deleteItem('refreshToken');
-                storage.deleteItem('phone_number');
-                window.location.href = '/register';
+            } catch {
+
             }
         }
-
+        storage.deleteItem('accessToken');
+        storage.deleteItem('refreshToken');
+        storage.deleteItem('phone_number');
+        window.location.href = '/register';
         return Promise.reject(error)
     }
 )
