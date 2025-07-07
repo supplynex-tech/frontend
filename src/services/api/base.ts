@@ -5,7 +5,7 @@ import format from "../../utils"
 import {Id, toast} from "react-toastify";
 
 const api = axios.create({
-    baseURL: 'http://185.8.175.13:8000/api/v1/',
+    baseURL: 'https://api.supplynex.ir/api/v1/',
 })
 
 api.interceptors.request.use(
