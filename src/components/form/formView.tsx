@@ -63,7 +63,7 @@ export default function FormView({formData}: { formData: FormResult }) {
                             switch (item.type) {
                                 case "TEXT_INPUT":
                                     return (
-                                        <>
+                                        <div>
                                             <BaseInput
                                                 label={item.title}
                                                 placeholder={item.placeholder}
@@ -72,11 +72,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "UPLOAD_FILE":
                                     return (
-                                        <>
+                                        <div>
                                             <UploadFile
                                                 label={item.title}
                                                 placeholder={item.placeholder}
@@ -85,11 +85,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "SELECT":
                                     return (
-                                        <>
+                                        <div>
                                             <Select
                                                 register={register(item.id.toString())}
                                                 label={item.title}
@@ -99,11 +99,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "DATE_PICKER":
                                     return (
-                                        <>
+                                        <div>
                                             <DatePicker
                                                 register={register(item.id.toString())}
                                                 label={item.title}
@@ -112,11 +112,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "RADIO":
                                     return (
-                                        <>
+                                        <div>
                                             <Radio
                                                 register={register(item.id.toString())}
                                                 label={item.title}
@@ -126,11 +126,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "COUNTER":
                                     return (
-                                        <>
+                                        <div>
                                             <Counter
                                                 register={register(item.id.toString())}
                                                 label={item.title}
@@ -139,11 +139,11 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 case "TEXTAREA":
                                     return (
-                                        <>
+                                        <div>
                                             <Textarea
                                                 label={item.title}
                                                 register={register(item.id.toString())}
@@ -152,7 +152,7 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}
                                             </p>
-                                        </>
+                                        </div>
                                     )
                                 default:
                                     return (<></>)
