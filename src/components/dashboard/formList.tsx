@@ -27,7 +27,7 @@ export default function FormList() {
     }
 
     const [isModalOpen, setModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState<{nextFormID: number, description: string, imageUrl: string}>({
+    const [modalContent, setModalContent] = useState<{ nextFormID: number, description: string, imageUrl: string }>({
         nextFormID: 0,
         description: "",
         imageUrl: ""
@@ -36,7 +36,7 @@ export default function FormList() {
     const [data, setData] = useState<DashboardContentType>({
         totalCount: 0,
         title: "داشبورد",
-        tableHeaders: ["نام", "وضعیت", "تاریخ ایجاد", "پاسخ"],
+        tableHeaders: ["تاریخ ایجاد", "کد رهگیری", "نام کالا", "وضعیت"],
         tableData: []
     });
 
@@ -72,6 +72,33 @@ export default function FormList() {
                 return <span className="text-gray-400">نامشخص</span>;
         }
     };
+
+    function getStatusSpan(status: string): JSX.Element {
+        const statusMap: Record<string, { label: string; className: string }> = {
+            PENDING: {
+                label: "در حال بررسی",
+                className: "text-secondary-500"
+            },
+            FINISHED: {
+                label: "پایان یافته",
+                className: "text-gray-600",
+            },
+            NO_ANSWER: {
+                label: "در انتظار پاسخ کاربر",
+                className: "text-emerald-600",
+            },
+        };
+
+        const { label, className } = statusMap[status] || {
+            label: "نامشخص",
+            className: "text-gray-400",
+        };
+
+        return <span className={className}>{label}</span>;
+    }
+
+
+
 
     useEffect(() => {
         getUserFormList(pageNumber).then(data => {
@@ -126,11 +153,14 @@ export default function FormList() {
                     <tbody>
                         {data.tableData.map((row, idx) => (
                             <tr key={idx} className="hover:bg-primary-50">
-                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.name}</td>
-                                <td className="p-4 border-b border-gray-200 text-sm">
-                                    <span className={getStatusClass(row.status)}>{row.status}</span>
-                                </td>
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
+                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id}</td>
+                                <td className="p-4 border-b border-gray-200 text-sm">
+                                    <span className={getStatusClass(row.status)}>{row.name}</span>
+                                </td>
+                                <td className="p-4 border-b border-gray-200 text-sm">
+                                    <span className={getStatusClass(row.status)}>{getStatusSpan(row.status)}</span>
+                                </td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
                                     {getResponseText(row.status, () => {
                                         setModalOpen(true);
