@@ -3,6 +3,8 @@ import { Register } from "@/validation/register";
 import { callApiWithToast } from "./base";
 
 export const sendOTP = async (data: Register): Promise<void> => {
+    const normalizedPhone = data.phoneNumber.replace(/^0/, "");
+
     try {
         await callApiWithToast({
             url: "accounting/send-otp/",
@@ -12,7 +14,7 @@ export const sendOTP = async (data: Register): Promise<void> => {
             badActionText: "شماره موبایل اشتباه می باشد"
         }, {
             body: {
-                phone_number: data.phoneNumber,
+                phone_number: normalizedPhone,
             }
         })
     } catch (err) {
@@ -21,8 +23,10 @@ export const sendOTP = async (data: Register): Promise<void> => {
 }
 
 export const verifyPhoneNumber = async (data: Register): Promise<authTypes> => {
+    const normalizedPhone = data.phoneNumber.replace(/^0/, "");
+
     try {
-        let result =  await callApiWithToast({
+        let result = await callApiWithToast({
             url: "accounting/verify-phone-number/",
             method: "POST",
             successActionText: "احراز هویت شما با موفقیت انجام شد",
@@ -30,7 +34,7 @@ export const verifyPhoneNumber = async (data: Register): Promise<authTypes> => {
             badActionText: "کد وارد شده اشتباه می باشد"
         }, {
             body: {
-                phone_number: data.phoneNumber,
+                phone_number: normalizedPhone,
                 otp: data.otp
             }
         })

@@ -27,7 +27,7 @@ export default function FormPage({id}: {
                 <h2 className="text-2xl font-bold">{formData?.name}</h2>
                 <div className="flex items-center gap-2">
                     <SecondaryNavigationButton
-                        title="بازگشت"
+                        title="داشبورد"
                         href="/dashboard"
                         className="hidden md:block"
                     />

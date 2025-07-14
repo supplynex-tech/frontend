@@ -6,18 +6,25 @@ import { UseFormRegisterReturn } from "react-hook-form";
 interface CounterProps {
     label: string;
     register: UseFormRegisterReturn<any>;
-    max?: number;
+    min?: number;
 }
 
-export default function Counter({ label, register, max=100 }: CounterProps) {
-    const [value, setValue] = useState(0);
+export default function Counter({ label, register, min = 1 }: CounterProps) {
+    const [value, setValue] = useState(min);
 
     const increase = () => {
-        if (value < max) setValue((prev) => prev + 1);
+        setValue((prev) => prev + 1);
     };
 
     const decrease = () => {
-        if (value > 0) setValue((prev) => prev - 1);
+        if (value > min) setValue((prev) => prev - 1);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const num = parseInt(e.target.value);
+        if (!isNaN(num) && num >= min) {
+            setValue(num);
+        }
     };
 
     useEffect(() => {
@@ -32,28 +39,26 @@ export default function Counter({ label, register, max=100 }: CounterProps) {
                 {label}
             </label>
 
-            <input
-                type="hidden"
-                {...register}
-                value={value}
-                readOnly
-            />
-
             <div className="flex items-center border-2 border-gray-200 rounded-lg overflow-hidden w-[150px]">
                 <button
                     type="button"
                     onClick={decrease}
-                    className="px-3 py-2 text-primary-500 hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
-                    disabled={value <= 0}
+                    className="px-3 py-2 text-primary-500 hover:bg-gray-100 cursor-pointer disabled:text-gray-300 disabled:cursor-not-allowed"
+                    disabled={value <= min}
                 >
                     −
                 </button>
-                <span className="flex-1 text-center text-gray-700">{value}</span>
+                <input
+                    type="number"
+                    {...register}
+                    value={value}
+                    onChange={handleChange}
+                    className="w-full text-center border-0 focus:ring-0 focus:outline-none appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
                 <button
                     type="button"
                     onClick={increase}
-                    className="px-3 py-2 text-primary-500 hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
-                    disabled={value >= max}
+                    className="px-3 py-2 text-primary-500 hover:bg-gray-100 cursor-pointer disabled:text-gray-300 disabled:cursor-not-allowed"
                 >
                     +
                 </button>

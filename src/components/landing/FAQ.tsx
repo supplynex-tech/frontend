@@ -57,11 +57,11 @@ const rulesContent: RuleSection[] = [
 // ----------------- Component -----------------
 export default function FAQ() {
     return (
-        <section className="px-5 pt-30 pb-20 max-w-4xl mx-auto text-gray-800 leading-relaxed">
+        <section className="px-5 pt-50 pb-20 max-w-4xl mx-auto text-gray-800 leading-relaxed">
             {rulesContent.map((section, index) => (
                 <div key={index} className="mb-10">
                     <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
-                    <p className="mb-6 whitespace-pre-line">{section.body}</p>
+                    <p className="mb-6 justify-fa whitespace-pre-line">{section.body}</p>
                 </div>
             ))}
         </section>

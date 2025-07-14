@@ -36,6 +36,18 @@ export default function RootLayout({
           src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.js"
           strategy="afterInteractive"
         />
+        {/* Raychat Config Script */}
+        <Script id="raychat-config" strategy="afterInteractive">
+          {`
+            window.RAYCHAT_TOKEN = "88d9aea6-fd2e-4ecc-a96c-02ad53fb76ae";
+            window.LOAD_TYPE = "SEO_FRIENDLY";
+          `}
+        </Script>
+        {/* Raychat Widget Loader */}
+        <Script
+          src="https://widget-react.raychat.io/install/widget.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

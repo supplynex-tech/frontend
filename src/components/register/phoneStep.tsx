@@ -29,11 +29,14 @@ export default function PhoneStep({ onSubmit, register, handleSubmit, errors }: 
                 <p className="text-danger text-sm mt-2">{errors.phoneNumber.message}</p>
             )}
 
-            <PrimaryActionButton
-                type="submit"
-                title="تأیید"
-                className="px-10 mt-3"
-            />
+            <div className="flex justify-center">
+                <PrimaryActionButton
+                    type="submit"
+                    title="تأیید"
+                    className="px-10 mt-3"
+                />
+            </div>
+
         </form>
     );
 }

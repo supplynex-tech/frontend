@@ -4,8 +4,10 @@ import {authTypes} from '@/types/api';
 import format from "../../utils"
 import {Id, toast} from "react-toastify";
 
+const baseHost = "https://api.supplynex.ir"
+
 const api = axios.create({
-    baseURL: 'https://api.supplynex.ir/api/v1/',
+    baseURL: `${baseHost}/api/v1/`,
 })
 
 api.interceptors.request.use(
@@ -33,7 +35,7 @@ api.interceptors.response.use(
             }
 
             try {
-                const res = await axios.post<authTypes>('http://192.168.1.140:8000/api/v1/accounting/refresh-token/', {
+                const res = await axios.post<authTypes>(`${baseHost}/api/v1/accounting/refresh-token/`, {
                     refresh,
                 })
                 const {access: newAccess} = res.data

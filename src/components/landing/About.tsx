@@ -72,23 +72,25 @@ const data: AboutData = {
 
 export default function About() {
     return (
-        <section className="px-5 pt-30 pb-20 max-w-4xl mx-auto text-gray-800 leading-relaxed">
+        <section className="px-5 pt-50 pb-20 max-w-4xl mx-auto text-gray-800 leading-relaxed">
             <h2 className="text-2xl font-bold mb-4">{data.title}</h2>
-            <p className="mb-6">{data.intro}</p>
+            <p className="mb-6 justify-fa">{data.intro}</p>
 
             {data.sections.map((section, idx) => (
                 <div key={idx} className="mb-8">
                     <h3 className="text-lg font-semibold mb-3">{section.title}</h3>
 
-                    {section.description && <p className="mb-3">{section.description}</p>}
+                    {section.description && (
+                        <p className="mb-3 justify-fa">{section.description}</p>
+                    )}
 
                     {section.list && (
                         <ul className="list-disc pr-6 space-y-2">
                             {section.list.map((item, index) =>
                                 typeof item === "string" ? (
-                                    <li key={index}>{item}</li>
+                                    <li key={index} className="justify-fa">{item}</li>
                                 ) : (
-                                    <li key={index}>
+                                    <li key={index} className="justify-fa">
                                         <strong>{item.title}:</strong> {item.text}
                                     </li>
                                 )

@@ -35,11 +35,13 @@ export default function OtpStep({ onSubmit, register, handleSubmit, errors, phon
         ارسال مجدد کد
       </p>
 
-      <PrimaryActionButton
-        type="submit"
-        title="ارسال کد تأیید"
-        className="mt-3"
-      />
+      <div className="flex justify-center">
+        <PrimaryActionButton
+          type="submit"
+          title="ارسال کد تأیید"
+          className="mt-3"
+        />
+      </div>
     </form>
   );
 }

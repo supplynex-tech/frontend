@@ -31,14 +31,14 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="fixed w-full z-20 top-0 start-0 lg:py-5">
-      <div className="bg-gray-50 lg:rounded-lg lg:w-[80%] flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="fixed w-full z-20 top-0 start-0">
+      <div className="bg-gray-50 flex flex-wrap items-center justify-between mx-auto p-6">
         <Link href="/" className="flex items-center space-x-3">
           <Image src={logoImage} alt="لوگو" className="w-25" />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0">
           <PrimaryNavigationButton
-            title="ورود"
+            title="ثبت‌نام | ورود"
             href="/dashboard"
             className="hidden md:flex justify-center w-[150px]"
           />
@@ -86,12 +86,19 @@ export default function Navbar() {
             })}
           </ul>
           <PrimaryNavigationButton
-            title="ورود"
+            title="ثبت‌نام | ورود"
             href="/dashboard"
             className="md:hidden w-full"
           />
         </div>
       </div>
+      <Link href="./form/default">
+        <div className='bg-primary-300 p-5'>
+          <p className='text-gray-50 text-center animate-zoom text-xl font-semibold'>
+            اگر دنبال خرید هوشمندانه‌تر هستید، همین حالا نیاز خود را ثبت کنید.
+          </p>
+        </div>
+      </Link>
     </nav>
   );
 }

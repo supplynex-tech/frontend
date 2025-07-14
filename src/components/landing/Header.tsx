@@ -13,7 +13,7 @@ interface HeaderContent {
     button: string;
 }
 const headerContent: HeaderContent = {
-    title1: "خریدارت باهوشه،",
+    title1: "خریدارت باهوشه",
     title2: "بازار زیر انگشتشه، پیشنهادش زیر قیمتته",
     subtitle:
         "هوش مصنوعی SupplyNex مثل یه خریدار حرفه‌ای تو بازار می‌چرخه، مذاکره می‌کنه و بهترین گزینه‌ها رو برات میاره.",
@@ -31,14 +31,14 @@ export default function Header() {
             viewport={{ once: true, amount: 0.2 }}
         >
             <section className="flex justify-center">
-                <div className="w-[90%] md:w-[80%] grid grid-cols-1 lg:grid-cols-2 items-center lg:pt-50 pt-30 lg:pb-30 pb-10 relative rtl">
+                <div className="w-[90%] md:w-[80%] grid grid-cols-1 lg:grid-cols-2 items-center lg:pt-70 pt-30 lg:pb-30 pb-10 relative rtl">
                     <DotLottieReact src={headerContent.animationUrl} loop autoplay />
-                    <div className="flex flex-col items-center w-full lg:w-[80%]">
+                    <div className="flex flex-col items-start w-full lg:w-[85%]">
                         <div>
-                            <h2 className="text-2xl lg:text-3xl text-primary-700 font-bold pb-4">
+                            <h2 className="text-2xl lg:text-2xl text-primary-700 font-bold pb-4">
                                 {headerContent.title1}
                             </h2>
-                            <h2 className="text-2xl lg:text-3xl text-primary-700 font-bold pb-4">
+                            <h2 className="text-2xl lg:text-2xl text-primary-700 font-bold pb-4">
                                 {headerContent.title2}
                             </h2>
                         </div>

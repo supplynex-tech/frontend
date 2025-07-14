@@ -5,6 +5,7 @@ import { ResponseModal } from "../base/modal";
 import Link from "next/link";
 import Pagination from "../base/pagination";
 import { getUserFormList } from "@/services/api/dashboard";
+import { formatJalali } from "@/services/date";
 
 export default function FormList() {
     interface DashboardRowType {
@@ -35,7 +36,7 @@ export default function FormList() {
     const [data, setData] = useState<DashboardContentType>({
         totalCount: 0,
         title: "داشبورد",
-        tableHeaders: ["نام", "وضعیت", "فرم قبلی", "تاریخ ایجاد", "پاسخ"],
+        tableHeaders: ["نام", "وضعیت", "تاریخ ایجاد", "پاسخ"],
         tableData: []
     });
 
@@ -50,17 +51,6 @@ export default function FormList() {
             default:
                 return "text-gray-600";
         }
-    };
-
-    const getPreviousForm = (form: string | null) => {
-        if (!form) {
-            return <span className="text-gray-400">ندارد</span>;
-        }
-        return (
-            <Link href={form} className="text-primary-600 underline hover:text-primary-400">
-                فرم قبلی
-            </Link>
-        );
     };
 
     const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
@@ -140,10 +130,7 @@ export default function FormList() {
                                 <td className="p-4 border-b border-gray-200 text-sm">
                                     <span className={getStatusClass(row.status)}>{row.status}</span>
                                 </td>
-                                <td className="p-4 border-b border-gray-200 text-sm">
-                                    {getPreviousForm(row.previousForm)}
-                                </td>
-                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.createdAt}</td>
+                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
                                     {getResponseText(row.status, () => {
                                         setModalOpen(true);

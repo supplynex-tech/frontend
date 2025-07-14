@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import BaseInput from "../base/input/input";
 import Textarea from "../base/input/textarea";
 import UploadFile from "../base/input/uploadFile";
@@ -8,18 +8,18 @@ import Select from "../base/input/select";
 import DatePicker from "../base/input/datePicker";
 import Radio from "../base/input/radio";
 import Counter from "../base/input/counter";
-import {RegisterModal} from "../base/modal";
-import {PrimaryActionButton} from "../base/button";
-import {FormQuestion, FormResult} from "@/types/api";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {FormValidation, FormValidationGeneratorSchema} from "@/validation/form";
-import {sendForm} from "@/services/api/form";
-import {storage} from "@/services/localstorage";
-import {useRouter} from "next/navigation";
+import { RegisterModal } from "../base/modal";
+import { PrimaryActionButton } from "../base/button";
+import { FormQuestion, FormResult } from "@/types/api";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormValidation, FormValidationGeneratorSchema } from "@/validation/form";
+import { sendForm } from "@/services/api/form";
+import { storage } from "@/services/localstorage";
+import { useRouter } from "next/navigation";
 
 
-export default function FormView({formData}: { formData: FormResult }) {
+export default function FormView({ formData }: { formData: FormResult }) {
     const router = useRouter();
     const [showModal, setShowModal] = useState(false);
     const [data, setData] = useState<FormValidation>([]);
@@ -27,7 +27,7 @@ export default function FormView({formData}: { formData: FormResult }) {
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm<FormValidation>({
         resolver: zodResolver(FormValidationGeneratorSchema(formData?.questions || [])),
     });
@@ -39,6 +39,7 @@ export default function FormView({formData}: { formData: FormResult }) {
         } else {
             try {
                 await sendForm(formData.id, data);
+                router.push("/dashboard")
             } catch {
             }
         }
@@ -54,7 +55,7 @@ export default function FormView({formData}: { formData: FormResult }) {
 
     return (
         <>
-            {showModal && <RegisterModal onClose={closeAction}/>}
+            {showModal && <RegisterModal onClose={closeAction} />}
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 pt-5 py-15">
@@ -134,7 +135,6 @@ export default function FormView({formData}: { formData: FormResult }) {
                                             <Counter
                                                 register={register(item.id.toString())}
                                                 label={item.title}
-                                                max={"max" in item.options ? item.options.max : 100}
                                             />
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}

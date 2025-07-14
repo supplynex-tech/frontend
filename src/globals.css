@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Baloo';
-  src: url('../public/assets/fonts/BalooBhaijaan2-Regular.ttf') format('truetype');
+  font-family: 'IRANSansX';
+  src: url('/assets/fonts/IRANSansX-Regular.woff2') format('woff2'),
+    url('/assets/fonts/IRANSansX-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
-@theme {
-  --font-display: "Baloo", "sans-serif";
 
+@theme {
   --color-primary-50: #f0edf9;
   --color-primary-100: #d8d3f4;
   --color-primary-200: #b1a9e4;
@@ -39,6 +39,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: 'IRANSansX', sans-serif;
 }
 
 body {
@@ -75,6 +76,15 @@ body {
   .scrollbar-rounded::-webkit-scrollbar-track {
     background: transparent;
   }
+
+  .justify-fa {
+    text-align: justify;
+    text-align-last: right;
+    font-feature-settings: "calt" 0;
+    -moz-font-feature-settings: "calt" 0;
+    -webkit-font-feature-settings: "calt" 0;
+    word-spacing: -0.05em;
+  }
 }
 
 @layer utilities {
@@ -88,6 +98,22 @@ body {
       opacity: 1;
       transform: translateX(0);
     }
+  }
+
+  @keyframes zoomInOut {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .animate-zoom {
+    animation: zoomInOut 2s ease-in-out infinite;
   }
 
   .animate-fade-left {
@@ -113,7 +139,7 @@ body {
   }
 
   .otp-small {
-    width: 1.75rem; 
+    width: 1.75rem;
     height: 1.75rem;
   }
 }

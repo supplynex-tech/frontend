@@ -16,19 +16,18 @@ const contactInfo = {
     description:
         'SupplyNex به "خریدار هوشمند" شما تبدیل شده — تیمی حرفه‌ای و دیجیتال که از ثبت نیاز تا تحویل نهایی همراهتان است.',
     address: "تهران، میرداماد، برج آرین، پلاک 232، طبقه 2، واحد 5",
-    phone: "02122258309 - 09923403588 - 09192844533",
     email: "info@supplynex.ir",
 };
 
 const contactItems: ContactItem[] = [
     { label: "آدرس", value: contactInfo.address },
-    { label: "تماس با ما", value: contactInfo.phone },
     { label: "ایمیل ما", value: contactInfo.email },
 ];
 
 const siteLinks: SiteLink[] = [
     { title: "درباره ما", href: "/about" },
     { title: "قوانین و مقررات", href: "/faq" },
+    // { title: "نقشه سایت", href: "/sitemap.xml" },
     { title: "سوالات متداول", href: "/#questions" },
 ];
 
@@ -43,26 +42,35 @@ export default function Footer() {
                             <span className="font-bold pl-2">{item.label}:</span>
                             <span>{item.value}</span>
                         </li>
-                    ))}
+                    ))
+                    }
                 </ul>
                 <div className="flex flex-wrap gap-8 md:gap-12 md:w-1/5 relative md:pr-4">
                     <div className="border-t md:border-r md:border-t-0 border-gray-300 md:pr-5">
-                        <h4 className="mb-5 text-gray-300 hidden md:block">راهنمای سایت</h4>
+                        <h4 className="mb-5 text-gray-400 text-lg hidden md:block">راهنمای سایت</h4>
                         <ul className="flex flex-row md:flex-col gap-10 md:gap-3 text-sm pt-5 md:pt-0">
                             {siteLinks.map((link, index) => (
                                 <li key={index}>
-                                    <Link
-                                        href={link.href}
-                                        className="hover:text-red transition cursor-pointer"
-                                    >
-                                        {link.title}
-                                    </Link>
+                                    {link.href.endsWith('.xml') ? (
+                                        <a
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="hover:text-red transition cursor-pointer"
+                                        >
+                                            {link.title}
+                                        </a>
+                                    ) : (
+                                        <Link href={link.href} className="hover:text-red transition cursor-pointer">
+                                            {link.title}
+                                        </Link>
+                                    )}
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer >
     );
 }

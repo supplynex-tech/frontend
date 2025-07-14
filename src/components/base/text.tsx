@@ -39,7 +39,7 @@ export const AnimatedText = ({
       {wordsArray.map((word, idx) => (
         <motion.span
           key={word + idx}
-          className="text-primary-700 opacity-0"
+          className="text-primary-700 opacity-0 justify-fa"
           style={{
             filter: filter ? "blur(10px)" : "none",
           }}

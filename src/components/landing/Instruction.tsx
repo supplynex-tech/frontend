@@ -54,10 +54,10 @@ export default function Instruction() {
 
                             {/* Title & Description */}
                             <div>
-                                <h3 className="text-xl font-semibold text-primary-700 pt-3 pb-2">
+                                <h3 className="text-lg font-semibold text-primary-700 pt-3 pb-2">
                                     {item.title}
                                 </h3>
-                                <p className="text-gray-600">{item.description}</p>
+                                <p className="text-gray-600 justify-fa">{item.description}</p>
                             </div>
                         </li>
                     ))}

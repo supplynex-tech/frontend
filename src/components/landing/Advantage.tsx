@@ -80,7 +80,7 @@ export default function Advantage() {
                                     <h2 className="text-2xl text-primary-700 font-bold pb-4">
                                         {item.title}
                                     </h2>
-                                    <p className="text-xl text-primary-700 pb-4">
+                                    <p className="text-xl text-primary-700 pb-4 justify-fa">
                                         {item.description}
                                     </p>
                                 </div>
