@@ -1,8 +1,23 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://yourdomain.com', // دامنه واقعی پروژه
-  generateRobotsTxt: true, // robots.txt هم بسازه
-  changefreq: 'weekly',
+  siteUrl: 'https://supplynex.ir',
+  generateRobotsTxt: true,
+  changefreq: 'daily',
   priority: 0.7,
-  sitemapSize: 5000,
+  sitemapSize: 7000,
+
+  exclude: [
+    '/dashboard',
+    '/form/*'
+  ],
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/dashboard', '/form']
+      }
+    ]
+  }
+
 }

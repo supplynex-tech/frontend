@@ -52,7 +52,7 @@ export default function OtpInput({ length = 6, label, register }: OtpInputProps)
   const combined = values.join("");
   useEffect(() => {
     register.onChange?.({ target: { value: combined, name: register.name } } as any);
-  }, [combined]);
+  }, [combined , register]);
 
   useEffect(() => {
     focus(0);

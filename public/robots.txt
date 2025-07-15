@@ -1,9 +1,11 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /form
 
 # Host
-Host: https://yourdomain.com
+Host: https://supplynex.ir
 
 # Sitemaps
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://supplynex.ir/sitemap.xml

@@ -18,7 +18,7 @@ export default function FormPage({id}: {
         getForm(id).then(result => {
             setFormData(result)
         })
-    }, []);
+    }, [id]);
 
 
     return (

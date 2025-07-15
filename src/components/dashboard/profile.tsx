@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { storage } from "@/services/localstorage";
 import { getDashboardOverview } from "@/services/api/dashboard";
 

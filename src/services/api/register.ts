@@ -26,7 +26,7 @@ export const verifyPhoneNumber = async (data: Register): Promise<authTypes> => {
     const normalizedPhone = data.phoneNumber.replace(/^0/, "");
 
     try {
-        let result = await callApiWithToast({
+        const result = await callApiWithToast({
             url: "accounting/verify-phone-number/",
             method: "POST",
             successActionText: "احراز هویت شما با موفقیت انجام شد",
