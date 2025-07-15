@@ -6,6 +6,8 @@ import Link from "next/link";
 import Pagination from "../base/pagination";
 import { getUserFormList } from "@/services/api/dashboard";
 import { formatJalali } from "@/services/date";
+import Select from "../base/input/select";
+import Filter from "../base/input/filter";
 
 export default function FormList() {
     interface DashboardRowType {
@@ -36,31 +38,21 @@ export default function FormList() {
     const [data, setData] = useState<DashboardContentType>({
         totalCount: 0,
         title: "داشبورد",
-        tableHeaders: ["تاریخ ایجاد", "کد رهگیری", "نام کالا", "وضعیت"],
+        tableHeaders: ["تاریخ ایجاد", "کد رهگیری", "نام کالا", "وضعیت", "جزئیات"],
         tableData: []
     });
 
-    const getStatusClass = (status: string) => {
-        switch (status) {
-            case "در حال بررسی":
-                return "text-secondary-600 font-semibold";
-            case "بررسی شده":
-                return "text-emerald-600 font-semibold";
-            case "شروع نشده":
-                return "text-danger font-semibold";
-            default:
-                return "text-gray-600";
-        }
-    };
+    const timeOptions = ["همه", "امروز", "این ماه", "امسال"];
+    const [selected, setSelected] = useState("همه");
 
     const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
         switch (status) {
             case "PENDING":
-                return <span className="text-primary-200">مشاهده</span>;
+                return <span className="text-gray-300">مشاهده</span>;
             case "FINISHED":
                 return (
                     <span
-                        className="text-primary-400 font-medium hover:underline cursor-pointer"
+                        className="text-gray-600 font-medium hover:underline cursor-pointer"
                         onClick={onOpenModal}
                     >
                         مشاهده
@@ -77,7 +69,7 @@ export default function FormList() {
         const statusMap: Record<string, { label: string; className: string }> = {
             PENDING: {
                 label: "در حال بررسی",
-                className: "text-secondary-500"
+                className: "text-secondary-600"
             },
             FINISHED: {
                 label: "پایان یافته",
@@ -128,8 +120,15 @@ export default function FormList() {
 
     return (
         <section className="pt-10">
-            <span className="block text-lg font-semibold mb-4">فرم‌های من</span>
-
+            <div className="mb-4 flex justify-between">
+                <span className="text-lg font-semibold ">فرم‌های من</span>
+                {/* <Filter
+                    label="فیلتر زمانی"
+                    options={timeOptions}
+                // value={selected}
+                // onChange={setSelected}
+                /> */}
+            </div>
             <div
                 className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
         [&::-webkit-scrollbar]:h-1
@@ -155,11 +154,9 @@ export default function FormList() {
                             <tr key={idx} className="hover:bg-primary-50">
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id}</td>
+                                <td className="p-4 border-b border-gray-200 text-sm">{row.name}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
-                                    <span className={getStatusClass(row.status)}>{row.name}</span>
-                                </td>
-                                <td className="p-4 border-b border-gray-200 text-sm">
-                                    <span className={getStatusClass(row.status)}>{getStatusSpan(row.status)}</span>
+                                    {getStatusSpan(row.status)}
                                 </td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
                                     {getResponseText(row.status, () => {

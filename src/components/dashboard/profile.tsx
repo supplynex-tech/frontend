@@ -45,7 +45,7 @@ export default function Profile() {
         stats: [
             {
                 count: 0,
-                label: "شروع نشده",
+                label: "در انتظار پاسخ کاربر",
                 color: "primary-500",
             },
             {
@@ -55,7 +55,7 @@ export default function Profile() {
             },
             {
                 count: 0,
-                label: "بررسی شده",
+                label: "پایان یافته",
                 color: "emerald-600",
             },
         ],
@@ -76,7 +76,7 @@ export default function Profile() {
                 stats: [
                     {
                         count: result.no_answer,
-                        label: "شروع نشده",
+                        label: "در انتظار پاسخ کاربر",
                         color: "primary-500",
                     },
                     {
@@ -86,7 +86,7 @@ export default function Profile() {
                     },
                     {
                         count: result.finished,
-                        label: "بررسی شده",
+                        label: "پایان یافته",
                         color: "emerald-600",
                     },
                 ],
