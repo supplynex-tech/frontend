@@ -18,8 +18,6 @@ export const sendForm = async (userFormId: number, data: FormValidation): Promis
         index++;
     }
 
-    console.log(formData);
-
     try {
         await callApiWithToast({
             url: "form-generator/answer/",

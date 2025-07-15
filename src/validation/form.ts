@@ -2,20 +2,20 @@ import { z } from "zod";
 import { FormQuestion } from "@/types/api";
 
 const baseInputValidation = z.string().max(50);
-const UploadFileValidation = z
+const uploadFileValidation = z
     .any()
     .refine(
         (fileList) => {
             if (!fileList || fileList.length === 0) return true; // optional → valid
             return fileList[0].size <= 5 * 1024 * 1024;
         },
-        { message: "فایل حداکثر ۵ مگابایت" }
+        { message: "فایل حداکثر ۵ مگابایت می‌تواند باشد" }
     );
-const SelectValidation = z.string().max(50);
-const DatePickerValidation = z.string().max(50);
-const RadioValidation = z.array(z.string().max(50));
-const CounterValidation = z.number();
-const TextareaValidation = z.string().max(250);
+const selectValidation = z.string().max(50);
+const datePickerValidation = z.string().max(50);
+const radioValidation = z.array(z.string().max(50));
+const counterValidation = z.number();
+const textareaValidation = z.string().max(250);
 
 export const FormValidationGeneratorSchema = (
     questions: FormQuestion[]
@@ -30,31 +30,31 @@ export const FormValidationGeneratorSchema = (
                 validation = baseInputValidation;
                 break;
             case "UPLOAD_FILE":
-                validation = UploadFileValidation;
+                validation = uploadFileValidation;
                 break;
             case "SELECT":
-                validation = SelectValidation;
+                validation = selectValidation;
                 break;
             case "DATE_PICKER":
-                validation = DatePickerValidation;
+                validation = datePickerValidation;
                 break;
             case "RADIO":
-                validation = RadioValidation;
+                validation = radioValidation;
                 break;
             case "COUNTER":
-                validation = CounterValidation;
-                if (question.options && "max" in question.options) {
-                    validation = validation.max(question.options.max || 100);
-                }
+                validation = counterValidation;
                 break;
             case "TEXTAREA":
-                validation = TextareaValidation;
+                validation = textareaValidation;
                 break;
             default:
-                validation = z.any(); // fallback
+                validation = z.any(); // fallback برای موارد ناشناخته
         }
 
-        obj[question.id] = question.is_required ? validation : validation.optional();
+        // ✅ تبدیل id به string چون کلیدهای Zod object باید string باشن
+        obj[question.id.toString()] = question.is_required
+            ? validation
+            : validation.optional();
     });
 
     return z.object(obj);

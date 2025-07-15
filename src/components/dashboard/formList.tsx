@@ -91,7 +91,7 @@ export default function FormList() {
     useEffect(() => {
         getUserFormList(pageNumber).then(data => {
             const formListData: DashboardRowType[] = []
-            data.results.map(data => formListData.push(
+            data.results.reverse().map(data => formListData.push(
                 {
                     id: data.id,
                     name: data.name,
@@ -108,8 +108,6 @@ export default function FormList() {
                 totalCount: data.count,
                 tableData: formListData,
             }));
-            console.log(formListData)
-
         })
 
     }, [pageNumber]);
