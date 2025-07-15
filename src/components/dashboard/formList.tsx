@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { ResponseModal } from "../base/modal";
 import Link from "next/link";
 import Pagination from "../base/pagination";
 import { getUserFormList } from "@/services/api/dashboard";
 import { formatJalali } from "@/services/date";
-import Select from "../base/input/select";
-import Filter from "../base/input/filter";
+import TimeFormFilter from "./timeFormFilter";
 
 export default function FormList() {
     interface DashboardRowType {
@@ -41,9 +40,6 @@ export default function FormList() {
         tableHeaders: ["تاریخ ایجاد", "کد رهگیری", "نام کالا", "وضعیت", "جزئیات"],
         tableData: []
     });
-
-    const timeOptions = ["همه", "امروز", "این ماه", "امسال"];
-    const [selected, setSelected] = useState("همه");
 
     const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
         switch (status) {
@@ -122,12 +118,7 @@ export default function FormList() {
         <section className="pt-10">
             <div className="mb-4 flex justify-between">
                 <span className="text-lg font-semibold ">فرم‌های من</span>
-                {/* <Filter
-                    label="فیلتر زمانی"
-                    options={timeOptions}
-                // value={selected}
-                // onChange={setSelected}
-                /> */}
+                <TimeFormFilter/>
             </div>
             <div
                 className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
