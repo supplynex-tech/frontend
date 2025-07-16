@@ -1,63 +1,115 @@
 import { z } from "zod";
 import { FormQuestion } from "@/types/api";
 
-const baseInputValidation = z.string().max(50);
-const uploadFileValidation = z
-    .any()
-    .refine(
-        (fileList) => {
-            if (!fileList || fileList.length === 0) return true; // optional → valid
-            return fileList[0].size <= 5 * 1024 * 1024;
-        },
-        { message: "فایل حداکثر ۵ مگابایت می‌تواند باشد" }
+const emptyToUndef = (v: unknown) =>
+    v === "" || v === null || (v instanceof FileList && v.length === 0)
+        ? undefined
+        : v;
+
+const makeZString = (required: boolean) =>
+    z.preprocess(
+        emptyToUndef,
+        required
+            ? z
+                .string({ required_error: "این فیلد الزامی است" })
+                .nonempty("این فیلد نباید خالی باشد")
+                .max(50, "حداکثر ۵۰ کاراکتر مجاز است")
+            : z.string().max(50, "حداکثر ۵۰ کاراکتر مجاز است").optional()
     );
-const selectValidation = z.string().max(50);
-const datePickerValidation = z.string().max(50);
-const radioValidation = z.array(z.string().max(50));
-const counterValidation = z.number();
-const textareaValidation = z.string().max(250);
+
+const makeZFile = (required: boolean) =>
+    z.preprocess(
+        emptyToUndef,
+        required
+            ? z
+                .any()
+                .refine(
+                    (fileList) =>
+                        fileList &&
+                        fileList instanceof FileList &&
+                        fileList.length > 0 &&
+                        fileList[0].size <= 5 * 1024 * 1024,
+                    { message: "فایل الزامی و حداکثر ۵ مگابایت است" }
+                )
+            : z
+                .any()
+                .refine(
+                    (fileList) =>
+                        !fileList ||
+                        (fileList instanceof FileList &&
+                            (fileList.length === 0 ||
+                                fileList[0].size <= 5 * 1024 * 1024)),
+                    { message: "حداکثر اندازه فایل ۵ مگابایت است" }
+                )
+                .optional()
+    );
+
+const makeZRadio = (required: boolean) =>
+    z.preprocess(
+        emptyToUndef,
+        required
+            ? z
+                .array(z.string().max(50))
+                .min(1, "حداقل یک گزینه انتخاب کنید")
+                .refine((arr) => arr.length > 0, { message: "انتخاب الزامی است" })
+                .or(
+                    z
+                        .any({ required_error: "انتخاب الزامی است" })
+                        .transform(() => [])
+                )
+            : z.array(z.string().max(50)).optional()
+    );
+
+const makeZNumber = (required: boolean) =>
+    z.preprocess(
+        emptyToUndef,
+        required
+            ? z
+                .number({
+                    required_error: "عدد الزامی است",
+                    invalid_type_error: "لطفاً یک عدد معتبر وارد کنید",
+                })
+                .min(1, "عدد باید حداقل ۱ باشد")
+            : z.number().optional()
+    );
 
 export const FormValidationGeneratorSchema = (
     questions: FormQuestion[]
 ): z.ZodObject<Record<string, z.ZodTypeAny>> => {
     const obj: Record<string, z.ZodTypeAny> = {};
 
-    questions.forEach((question) => {
-        let validation: z.ZodTypeAny;
+    questions.forEach((q) => {
+        const key = q.id.toString();
+        const required = q.is_required;
 
-        switch (question.type) {
+        switch (q.type) {
             case "TEXT_INPUT":
-                validation = baseInputValidation;
-                break;
-            case "UPLOAD_FILE":
-                validation = uploadFileValidation;
-                break;
             case "SELECT":
-                validation = selectValidation;
-                break;
             case "DATE_PICKER":
-                validation = datePickerValidation;
-                break;
-            case "RADIO":
-                validation = radioValidation;
-                break;
-            case "COUNTER":
-                validation = counterValidation;
-                break;
             case "TEXTAREA":
-                validation = textareaValidation;
+                obj[key] = makeZString(required);
                 break;
-            default:
-                validation = z.any(); // fallback برای موارد ناشناخته
-        }
 
-        // ✅ تبدیل id به string چون کلیدهای Zod object باید string باشن
-        obj[question.id.toString()] = question.is_required
-            ? validation
-            : validation.optional();
+            case "UPLOAD_FILE":
+                obj[key] = makeZFile(required);
+                break;
+
+            case "RADIO":
+                obj[key] = makeZRadio(required);
+                break;
+
+            case "COUNTER":
+                obj[key] = makeZNumber(required);
+                break;
+
+            default:
+                obj[key] = z.any();
+        }
     });
 
     return z.object(obj);
 };
 
-export type FormValidation = z.infer<ReturnType<typeof FormValidationGeneratorSchema>>;
+export type FormValidation = z.infer<
+    ReturnType<typeof FormValidationGeneratorSchema>
+>;

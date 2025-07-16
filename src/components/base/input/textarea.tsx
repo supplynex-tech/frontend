@@ -1,5 +1,3 @@
-// components/form/BaseInput.tsx
-
 import InputBox from "./inputBox";
 import {UseFormRegisterReturn} from "react-hook-form";
 
