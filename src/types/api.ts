@@ -41,7 +41,7 @@ export interface FormQuestion {
   title: string;
   placeholder: string;
   is_required: boolean;
-  type: "TEXT_INPUT" | "UPLOAD_FILE" | "SELECT" | "DATE_PICKER" | "RADIO" | "COUNTER" | "TEXTAREA";
+  type: "TEXT_INPUT" | "UPLOAD_FILE" | "SELECT" | "DATE_PICKER" | "RADIO" | "IMAGE_RADIO" | "COUNTER" | "TEXTAREA";
   options: FormQuestionOptions | string[]
 }
 

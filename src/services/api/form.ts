@@ -3,7 +3,7 @@ import {FormValidation} from "@/validation/form";
 
 export const sendForm = async (userFormId: number, data: FormValidation): Promise<void> => {
     const formData = new FormData();
-    let index = 0;
+    let index = 1;
 
     for (const [form_question_id, answer] of Object.entries(data)) {
         if (answer instanceof FileList) {

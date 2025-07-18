@@ -34,7 +34,7 @@ export default function Counter({ label, register, min = 1 }: CounterProps) {
     }, [value, register]);
 
     return (
-        <div className="pt-6">
+        <div className="pt-8">
             <label htmlFor={register.name} className="block text-md font-medium text-gray-600 mb-2">
                 {label}
             </label>

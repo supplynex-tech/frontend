@@ -17,6 +17,7 @@ import { FormValidation, FormValidationGeneratorSchema } from "@/validation/form
 import { sendForm } from "@/services/api/form";
 import { storage } from "@/services/localstorage";
 import { useRouter } from "next/navigation";
+import ImageRadio from "./imageRadio";
 
 
 export default function FormView({ formData }: { formData: FormResult }) {
@@ -123,6 +124,21 @@ export default function FormView({ formData }: { formData: FormResult }) {
                                                 label={item.title}
                                                 multi={"multi" in item.options ? item.options.multi : false}
                                                 options={"items" in item.options ? item.options.items : []}
+                                            />
+                                            <p className="text-danger text-sm mt-2">
+                                                {errors?.[item.id.toString()]?.message}
+                                            </p>
+                                        </div>
+                                    )
+                                case "IMAGE_RADIO":
+                                    return (
+                                        <div>
+                                            <ImageRadio
+                                                register={register(item.id.toString())}
+                                                label={item.title}
+                                                multi={"multi" in item.options ? item.options.multi : false}
+                                                options={"items" in item.options ? item.options.items : []}
+
                                             />
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}

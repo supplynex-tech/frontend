@@ -37,11 +37,11 @@ export default function Select({ label, register, placeholder, options }: Select
             readOnly
         />
 
-        <div ref={wrapperRef} className="relative w-full">
+        <div ref={wrapperRef} className="relative w-full pt-2">
           <button
               onClick={() => setOpen(!open)}
               type="button"
-              className={`w-full flex justify-between items-center border-2 px-3 py-2.5 rounded-lg text-sm transition ${
+              className={`w-full flex justify-between items-center border-2 px-3 py-2 rounded-lg text-md transition ${
                   open ? "border-primary-100 ring-1 ring-primary-100" : "border-gray-200 hover:border-gray-200"
               }`}
           >

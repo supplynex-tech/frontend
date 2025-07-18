@@ -54,7 +54,7 @@ export default function ScrollingDatePicker({ value, onChange }: ScrollingDatePi
   }, [year, month, day, days, years]);
 
   return (
-    <div dir="ltr" className="flex z-50 absolute gap-4 items-start bg-gray-50 p-4 rounded-xl shadow-md w-full mx-auto mt-4">
+    <div dir="ltr" className="flex z-50 absolute gap-4 items-start bg-gray-50 p-4 rounded-xl shadow-md w-full mx-auto mt-6">
       <div ref={yearRef} className="flex-1 px-2 h-40 overflow-y-scroll snap-y snap-mandatory [&::-webkit-scrollbar]:w-1
   [&::-webkit-scrollbar-track]:rounded-full
   [&::-webkit-scrollbar-track]:bg-gray-200   
