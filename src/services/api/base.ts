@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { storage } from '../localstorage';
+import { storage } from '../storage';
 import { authTypes } from '@/types/api';
 import format from "../../utils"
 import { Id, toast } from "react-toastify";

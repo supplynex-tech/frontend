@@ -3,7 +3,7 @@
 import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
 import { useEffect, useState } from "react";
-import { storage } from "@/services/localstorage";
+import { storage } from "../../services/storage";
 import { getDashboardOverview } from "@/services/api/dashboard";
 
 interface Phone {

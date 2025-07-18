@@ -1,4 +1,4 @@
-import { storage } from "@/services/localstorage";
+import { storage } from "../../services/storage";
 import { ExitNavigationButton, PrimaryIconButton, PrimaryNavigationButton } from "../base/button";
 import FormList from "../dashboard/formList";
 import Profile from "../dashboard/profile";

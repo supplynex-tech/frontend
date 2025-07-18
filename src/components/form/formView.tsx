@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormValidation, FormValidationGeneratorSchema } from "@/validation/form";
 import { sendForm } from "@/services/api/form";
-import { storage } from "@/services/localstorage";
+import { storage } from "../../services/storage";
 import { useRouter } from "next/navigation";
 import ImageRadio from "../base/input/imageRadio";
 

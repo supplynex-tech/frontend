@@ -7,7 +7,7 @@ import PhoneStep from "../register/phoneStep";
 import OtpStep from "../register/otpStep";
 import { Register, RegisterSchema } from "@/validation/register";
 import { sendOTP, verifyPhoneNumber } from "@/services/api/register";
-import { storage } from "@/services/localstorage";
+import { storage } from "../../services/storage";
 
 export default function RegisterView({closeAction}: { closeAction: () => void }) {
     const [step, setStep] = useState<"phone" | "otp">("phone");

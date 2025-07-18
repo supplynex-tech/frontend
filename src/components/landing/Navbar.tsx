@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { ExitNavigationButton, PrimaryNavigationButton } from '../base/button';
 import Image from 'next/image';
 import logoImage from "@/../public/assets/images/logo.png";
-import { storage } from '@/services/localstorage';
 import { useRouter } from 'next/navigation';
 
 interface NavItem {
@@ -41,24 +40,11 @@ export default function Navbar() {
           <Image src={logoImage} alt="لوگو" className="w-25" />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0">
-          {storage.getItem("phone_number") === null ?
-            <PrimaryNavigationButton
-              title="ثبت‌نام | ورود"
-              href="/dashboard"
-              className="hidden md:flex justify-center w-[150px]"
-            /> :
-            <ExitNavigationButton
-              title="خروج"
-              className="hidden md:flex justify-center w-[150px]"
-              onClick={() => {
-                storage.deleteItem('accessToken');
-                storage.deleteItem('refreshToken');
-                storage.deleteItem('phone_number');
-                router.replace("/")
-              }
-              }
-            />
-          }
+          <PrimaryNavigationButton
+            title="ثبت‌نام | ورود"
+            href="/dashboard"
+            className="hidden md:flex justify-center w-[150px]"
+          />
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
@@ -102,23 +88,11 @@ export default function Navbar() {
               );
             })}
           </ul>
-          {storage.getItem("phone_number") === null ?
-            <PrimaryNavigationButton
-              title="ثبت‌نام | ورود"
-              href="/dashboard"
-              className="md:hidden w-full"
-            /> :
-            <ExitNavigationButton
-              title="خروج"
-              className="md:hidden w-full"
-              onClick={() => {
-                storage.deleteItem('accessToken');
-                storage.deleteItem('refreshToken');
-                storage.deleteItem('phone_number');
-                router.replace("/");
-              }
-              }
-            />}
+          <PrimaryNavigationButton
+            title="ثبت‌نام | ورود"
+            href="/dashboard"
+            className="md:hidden w-full"
+          />
         </div>
       </div>
       <Link href="./form/default/new">
