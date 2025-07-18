@@ -41,7 +41,7 @@ export function SecondaryActionButton({ title, type, className }: PrimaryButtonP
     )
 }
 
-export function PrimaryNavigationButton({ title, href, className }: SecondaryButtonProps) {
+export function PrimaryNavigationButton({ title, href, className, onClick }: SecondaryButtonProps) {
     return (
         <Link href={href}>
             <button
@@ -54,7 +54,7 @@ export function PrimaryNavigationButton({ title, href, className }: SecondaryBut
     )
 }
 
-export function SecondaryNavigationButton({ title, href, className }: SecondaryButtonProps) {
+export function SecondaryNavigationButton({ title, href, className, onClick }: SecondaryButtonProps) {
     return (
         <Link href={href}>
             <button
@@ -80,7 +80,7 @@ export function ExitNavigationButton({ title, href, className, onClick }: Second
 }
 
 
-export function PrimaryIconButton({ href, children, className }: SecondaryButtonProps) {
+export function PrimaryIconButton({ href, children, className, onClick }: SecondaryButtonProps) {
     return (
         <Link href={href}>
             <button className={`flex items-center justify-center w-10 h-10 rounded-full bg-secondary-500 hover:bg-secondary-400 text-gray-800 md:hidden hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`} >
@@ -90,7 +90,7 @@ export function PrimaryIconButton({ href, children, className }: SecondaryButton
     )
 }
 
-export function SecondaryIconButton({ href, children, className }: SecondaryButtonProps) {
+export function SecondaryIconButton({ href, children, className, onClick }: SecondaryButtonProps) {
     return (
         <Link href={href}>
             <button className={`flex items-center justify-center w-10 h-10 rounded-full bg-primary-300 hover:bg-primary-400 text-gray-50 md:hidden hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`} >
