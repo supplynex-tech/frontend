@@ -17,7 +17,7 @@ import { FormValidation, FormValidationGeneratorSchema } from "@/validation/form
 import { sendForm } from "@/services/api/form";
 import { storage } from "@/services/localstorage";
 import { useRouter } from "next/navigation";
-import ImageRadio from "./imageRadio";
+import ImageRadio from "../base/input/imageRadio";
 
 
 export default function FormView({ formData }: { formData: FormResult }) {
@@ -130,14 +130,13 @@ export default function FormView({ formData }: { formData: FormResult }) {
                                             </p>
                                         </div>
                                     )
-                                case "IMAGE_RADIO":
+                                case "MULTI_SELECT_IMAGE":
                                     return (
                                         <div>
                                             <ImageRadio
                                                 register={register(item.id.toString())}
                                                 label={item.title}
-                                                multi={"multi" in item.options ? item.options.multi : false}
-                                                options={"items" in item.options ? item.options.items : []}
+                                                options={formData.multi_select_images.map((data => data.image))}
 
                                             />
                                             <p className="text-danger text-sm mt-2">

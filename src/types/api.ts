@@ -29,6 +29,11 @@ export interface FormResult {
   description_result: string;
   created_time: string;
   next_form_template_result?: FormResult
+  multi_select_images: MultiSelectImage[]
+}
+
+export interface MultiSelectImage {
+  image: string;
 }
 
 export interface MainKey {
@@ -47,7 +52,7 @@ export interface FormQuestion {
   title: string;
   placeholder: string;
   is_required: boolean;
-  type: "TEXT_INPUT" | "UPLOAD_FILE" | "SELECT" | "DATE_PICKER" | "RADIO" | "IMAGE_RADIO" | "COUNTER" | "TEXTAREA";
+  type: "TEXT_INPUT" | "UPLOAD_FILE" | "SELECT" | "DATE_PICKER" | "RADIO" | "MULTI_SELECT_IMAGE" | "COUNTER" | "TEXTAREA";
   options: FormQuestionOptions | string[]
 }
 

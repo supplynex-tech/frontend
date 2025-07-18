@@ -13,16 +13,10 @@ export default function Radio({ label, register, multi = true, options }: RadioP
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
-    if (multi) {
       register.onChange({
         target: { value: selected, name: register.name },
       });
-    } else if (selected.length > 0) {
-      register.onChange({
-        target: { value: selected[0], name: register.name },
-      });
-    }
-  }, [selected, multi, register]);
+  }, [selected, multi]);
 
   const handleChange = (id: string) => {
     if (multi) {

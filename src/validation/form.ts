@@ -65,7 +65,7 @@ const makeZImageRadio = (required: boolean) =>
         emptyToUndef,
         required
             ? z
-                .array(z.string().max(50))
+                .array(z.string().max(250))
                 .min(1, "حداقل یک گزینه انتخاب کنید")
                 .refine((arr) => arr.length > 0, { message: "انتخاب الزامی است" })
                 .or(
@@ -73,7 +73,7 @@ const makeZImageRadio = (required: boolean) =>
                         .any({ required_error: "انتخاب الزامی است" })
                         .transform(() => [])
                 )
-            : z.array(z.string().max(50)).optional()
+            : z.array(z.string().max(250)).optional()
     );
 
 const makeZNumber = (required: boolean) =>
@@ -114,7 +114,7 @@ export const FormValidationGeneratorSchema = (
                 obj[key] = makeZRadio(required);
                 break;
 
-            case "IMAGE_RADIO":
+            case "MULTI_SELECT_IMAGE":
                 obj[key] = makeZImageRadio(required);
                 break;
 
