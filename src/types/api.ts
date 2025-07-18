@@ -17,17 +17,23 @@ export interface PaginatedFormResponse {
   results: FormResult[];
 }
 
+
 export interface FormResult {
   id: number;
   name: string;
   status: "PENDING" | "FINISHED" | "NO_ANSWER";
+  main_key?: MainKey
   questions: FormQuestion[];
   answers: FormAnswer[];
   image_result: string;
   description_result: string;
-  previous_form_template_result: number;
-  next_form_template_result: number;
   created_time: string;
+  next_form_template_result?: FormResult
+}
+
+export interface MainKey {
+  title: string;
+  value: string;
 }
 
 export interface FormQuestionOptions {
@@ -49,6 +55,6 @@ export interface FormAnswer {
   id: number;
   user_form_id: number;
   form_question_id: number;
-  form_question_data: FormQuestion;
+  form_question_title: string;
   answer: string;
 }

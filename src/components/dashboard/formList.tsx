@@ -13,10 +13,8 @@ export default function FormList() {
         id: number;
         name: string;
         status: string;
-        previousForm: string | null;
         createdAt: string;
         description: string;
-        nextFormID: number;
         imageUrl: string;
     }
 
@@ -41,25 +39,25 @@ export default function FormList() {
         tableData: []
     });
 
-    const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
-        switch (status) {
-            case "PENDING":
-                return <span className="text-gray-300">مشاهده</span>;
-            case "FINISHED":
-                return (
-                    <span
-                        className="text-gray-600 font-medium hover:underline cursor-pointer"
-                        onClick={onOpenModal}
-                    >
-                        مشاهده
-                    </span>
-                );
-            case "NO_ANSWER":
-                return <Link href={"/form/" + id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">شروع</Link>;
-            default:
-                return <span className="text-gray-400">نامشخص</span>;
-        }
-    };
+    // const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
+    //     switch (status) {
+    //         case "PENDING":
+    //             return <span className="text-gray-300">مشاهده</span>;
+    //         case "FINISHED":
+    //             return (
+    //                 <span
+    //                     className="text-gray-600 font-medium hover:underline cursor-pointer"
+    //                     onClick={onOpenModal}
+    //                 >
+    //                     مشاهده
+    //                 </span>
+    //             );
+    //         case "NO_ANSWER":
+    //             return <Link href={"/form/" + id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">شروع</Link>;
+    //         default:
+    //             return <span className="text-gray-400">نامشخص</span>;
+    //     }
+    // };
 
     function getStatusSpan(status: string): JSX.Element {
         const statusMap: Record<string, { label: string; className: string }> = {
@@ -91,13 +89,11 @@ export default function FormList() {
     useEffect(() => {
         getUserFormList(pageNumber).then(data => {
             const formListData: DashboardRowType[] = []
-            data.results.reverse().map(data => formListData.push(
+            data.results.map(data => formListData.push(
                 {
                     id: data.id,
-                    name: data.name,
+                    name: data.main_key?.value || "",
                     status: data.status,
-                    previousForm: data.previous_form_template_result?.toString(),
-                    nextFormID: data.next_form_template_result,
                     createdAt: data.created_time,
                     description: data.description_result,
                     imageUrl: data.image_result
@@ -148,14 +144,7 @@ export default function FormList() {
                                     {getStatusSpan(row.status)}
                                 </td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
-                                    {getResponseText(row.status, () => {
-                                        setModalOpen(true);
-                                        setModalContent({
-                                            nextFormID: row.nextFormID,
-                                            description: row.description,
-                                            imageUrl: row.imageUrl,
-                                        });
-                                    }, row.id)}
+                                    <Link href={"/form/" + row.id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">مشاهده</Link>
                                 </td>
                             </tr>
                         ))}

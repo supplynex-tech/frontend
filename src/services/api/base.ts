@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {storage} from '../localstorage';
-import {authTypes} from '@/types/api';
+import { storage } from '../localstorage';
+import { authTypes } from '@/types/api';
 import format from "../../utils"
-import {Id, toast} from "react-toastify";
+import { Id, toast } from "react-toastify";
 
 const baseHost = "https://api.supplynex.ir"
 
@@ -38,19 +38,19 @@ api.interceptors.response.use(
                 const res = await axios.post<authTypes>(`${baseHost}/api/v1/accounting/refresh-token/`, {
                     refresh,
                 })
-                const {access: newAccess} = res.data
+                const { access: newAccess } = res.data
                 storage.setItem('accessToken', newAccess || "")
 
                 originalRequest.headers.Authorization = `Bearer ${newAccess}`
                 return api(originalRequest)
             } catch {
-
+                storage.deleteItem('accessToken');
+                storage.deleteItem('refreshToken');
+                storage.deleteItem('phone_number');
+                window.location.href = '/register';
             }
         }
-        storage.deleteItem('accessToken');
-        storage.deleteItem('refreshToken');
-        storage.deleteItem('phone_number');
-        window.location.href = '/register';
+
         return Promise.reject(error)
     }
 )

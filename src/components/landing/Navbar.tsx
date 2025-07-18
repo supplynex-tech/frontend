@@ -92,7 +92,7 @@ export default function Navbar() {
           />
         </div>
       </div>
-      <Link href="./form/default">
+      <Link href="./form/default/new">
         <div className='bg-primary-300 p-5'>
           <p className='text-gray-50 text-center animate-zoom text-xl font-semibold'>
             اگر دنبال خرید هوشمندانه‌تر هستید، همین حالا نیاز خود را ثبت کنید.

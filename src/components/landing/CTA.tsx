@@ -28,7 +28,7 @@ export default function CTA() {
 
                 <PrimaryNavigationButton
                     title={data.button}
-                    href="/form/default"
+                    href="/form/default/new"
                     className="w-[200px] sm:w-[300px]"
                 />
             </div>
