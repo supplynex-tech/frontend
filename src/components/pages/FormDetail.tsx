@@ -77,7 +77,7 @@ export default function FormDetailPage({ id }: {
 
     return (
         <DashboardWrapper>
-            <div className="flex flex-row justify-between items-center py-10">
+            <div className="flex flex-row justify-between items-center pt-5 pb-10">
                 {/* <h2 className="text-2xl font-bold">{formData?.name}</h2> */}
                 <h2 className="text-2xl font-bold">{formData?.main_key?.title}: {formData?.main_key?.value}</h2>
                 <div className="flex items-center gap-2">
@@ -94,7 +94,6 @@ export default function FormDetailPage({ id }: {
             <section id="forms" className="w-full flex flex-col gap-5">
                 {formData && RenderForm(formData)}
             </section>
-
 
         </DashboardWrapper >
     );

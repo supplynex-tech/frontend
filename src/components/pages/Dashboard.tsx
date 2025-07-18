@@ -1,10 +1,14 @@
-import { PrimaryIconButton, PrimaryNavigationButton } from "../base/button";
+import { storage } from "@/services/localstorage";
+import { ExitNavigationButton, PrimaryIconButton, PrimaryNavigationButton } from "../base/button";
 import FormList from "../dashboard/formList";
 import Profile from "../dashboard/profile";
 import DashboardWrapper from "../dashboard/wrapper";
 import { FaPlus } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
+    const router = useRouter();
+
     return (
         <DashboardWrapper>
             <div className="flex flex-row justify-between items-center pb-5 md:pb-0">
@@ -18,6 +22,17 @@ export default function DashboardPage() {
                     <PrimaryIconButton href="/form/default" className="md:hidden">
                         <FaPlus />
                     </PrimaryIconButton>
+                    <ExitNavigationButton
+                        title="خروج"
+                        onClick={() => {
+                            storage.deleteItem('accessToken');
+                            storage.deleteItem('refreshToken');
+                            storage.deleteItem('phone_number');
+                            router.replace("/")
+
+                        }
+                        }
+                    />
                 </div>
             </div>
 

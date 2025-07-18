@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 
-export default function TimeFormFilter() {
+export default function timeFormFilter() {
     const [selected, setSelected] = useState("همه");
     const [open, setOpen] = useState(false);
     const wrapperRef = useRef<HTMLDivElement>(null);

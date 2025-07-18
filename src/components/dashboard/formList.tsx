@@ -39,26 +39,6 @@ export default function FormList() {
         tableData: []
     });
 
-    // const getResponseText = (status: string, onOpenModal: () => void, id: number) => {
-    //     switch (status) {
-    //         case "PENDING":
-    //             return <span className="text-gray-300">مشاهده</span>;
-    //         case "FINISHED":
-    //             return (
-    //                 <span
-    //                     className="text-gray-600 font-medium hover:underline cursor-pointer"
-    //                     onClick={onOpenModal}
-    //                 >
-    //                     مشاهده
-    //                 </span>
-    //             );
-    //         case "NO_ANSWER":
-    //             return <Link href={"/form/" + id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">شروع</Link>;
-    //         default:
-    //             return <span className="text-gray-400">نامشخص</span>;
-    //     }
-    // };
-
     function getStatusSpan(status: string): JSX.Element {
         const statusMap: Record<string, { label: string; className: string }> = {
             PENDING: {
@@ -67,11 +47,11 @@ export default function FormList() {
             },
             FINISHED: {
                 label: "پایان یافته",
-                className: "text-gray-600",
+                className: "text-emerald-600",
             },
             NO_ANSWER: {
                 label: "در انتظار پاسخ کاربر",
-                className: "text-emerald-600",
+                className: "text-gray-600",
             },
         };
 
@@ -111,8 +91,7 @@ export default function FormList() {
     return (
         <section className="pt-10">
             <div className="mb-4 flex justify-between">
-                <span className="text-lg font-semibold ">فرم‌های من</span>
-                <TimeFormFilter/>
+                <span className="text-lg font-semibold pb-5">فرم‌های من</span>
             </div>
             <div
                 className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
@@ -138,7 +117,7 @@ export default function FormList() {
                         {data.tableData.map((row, idx) => (
                             <tr key={idx} className="hover:bg-primary-50">
                                 <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
-                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id}</td>
+                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id.toString().padStart(7, "0")}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">{row.name}</td>
                                 <td className="p-4 border-b border-gray-200 text-sm">
                                     {getStatusSpan(row.status)}

@@ -75,7 +75,7 @@ export default function Customers() {
             prefix: "+",
         },
         {
-            end: 6,
+            end: 24,
             label: "میانگین زمان دریافت پیشنهاد",
             detail: "فرایند چندروزه را به چند ساعت کاهش دادیم",
             prefix: "-",
@@ -95,7 +95,7 @@ export default function Customers() {
             suffix: "%",
         },
         {
-            end: 1000,
+            end: 20000,
             label: "تأمین‌کننده معتبر تاییدشده",
             detail: "شما مطمئن انتخاب می‌کنید، ما تأمین را تضمین می‌کنیم",
             prefix: "+",
