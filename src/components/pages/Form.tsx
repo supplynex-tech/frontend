@@ -1,15 +1,15 @@
 "use client";
 
 import { FaArrowLeft } from "react-icons/fa";
-import { SecondaryIconButton, SecondaryNavigationButton } from "../base/button";
+import { ExitNavigationButton, PrimaryNavigationButton, SecondaryIconButton, SecondaryNavigationButton } from "../base/button";
 import DashboardWrapper from "../dashboard/wrapper";
 import FormView from "../form/formView";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { getForm } from "@/services/api/dashboard";
-import {FormResult} from "@/types/api";
+import { FormResult } from "@/types/api";
 
 
-export default function FormPage({id}: {
+export default function FormPage({ id }: {
     id: string;
 }) {
     const [formData, setFormData] = useState<FormResult>();
@@ -26,7 +26,7 @@ export default function FormPage({id}: {
             <div className="flex flex-row justify-between items-center pb-5 md:pb-0">
                 <h2 className="text-2xl font-bold">{formData?.name}</h2>
                 <div className="flex items-center gap-2">
-                    <SecondaryNavigationButton
+                    <PrimaryNavigationButton
                         title="داشبورد"
                         href="/dashboard"
                         className="hidden md:block"
