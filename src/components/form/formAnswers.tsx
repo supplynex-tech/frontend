@@ -40,7 +40,7 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-10">
                 {formData.description_result &&
                 <span>توضیحات: {formData.description_result}</span>}
-                {formData.description_result &&
+                {formData.image_result &&
                 <span>پیوست:
                 <img
                     src={formData.image_result}
