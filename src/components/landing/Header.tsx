@@ -31,7 +31,7 @@ export default function Header() {
             viewport={{ once: true, amount: 0.2 }}
         >
             <section className="flex justify-center">
-                <div className="w-[90%] md:w-[80%] grid grid-cols-1 lg:grid-cols-2 items-center lg:pt-70 pt-30 lg:pb-30 pb-10 relative rtl">
+                <div className="w-[90%] md:w-[80%] grid grid-cols-1 lg:grid-cols-2 items-center lg:pt-70 pt-60 lg:pb-30 pb-10 relative rtl">
                     <DotLottieReact src={headerContent.animationUrl} loop autoplay />
                     <div className="flex flex-col items-start w-full lg:w-[85%]">
                         <div>

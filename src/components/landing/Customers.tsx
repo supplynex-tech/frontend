@@ -1,5 +1,6 @@
 "use client";
 
+import { toPersianDigits } from "@/utils/toPersianDigits";
 import { useEffect, useRef, useState } from "react";
 
 type CounterProps = {
@@ -56,7 +57,7 @@ function SingleCounter({ end, label, detail, suffix = "", prefix = "" }: Counter
     return (
         <section ref={containerRef} className="flex flex-col items-center text-center space-y-1">
             <div className="text-4xl font-bold text-primary-700">
-                {count}
+                {toPersianDigits(count)}
                 {suffix}
                 {prefix}
             </div>
@@ -78,8 +79,7 @@ export default function Customers() {
             end: 24,
             label: "میانگین زمان دریافت پیشنهاد",
             detail: "فرایند چندروزه را به چند ساعت کاهش دادیم",
-            prefix: "-",
-            suffix: "h",
+            suffix: "ساعت",
         },
         {
             end: 18,

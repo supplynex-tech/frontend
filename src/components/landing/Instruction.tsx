@@ -36,7 +36,6 @@ export default function Instruction() {
                 <ul className="grid grid-cols-1 md:grid-cols-3 gap-15 px-5 py-10 md:p-20">
                     {steps.map((item, index) => (
                         <li key={item.step} className="flex flex-col">
-                            {/* Step Number */}
                             <motion.section
                                 initial={{ opacity: 0, x: 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -51,8 +50,6 @@ export default function Instruction() {
                                     {item.step}
                                 </h2>
                             </motion.section>
-
-                            {/* Title & Description */}
                             <div>
                                 <h3 className="text-lg font-semibold text-primary-700 pt-3 pb-2">
                                     {item.title}

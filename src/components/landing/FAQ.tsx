@@ -1,4 +1,9 @@
+
+
 "use client";
+
+import { toPersianDigits } from "@/utils/toPersianDigits";
+import { useMemo } from "react";
 
 interface RuleSection {
     title: string;
@@ -54,14 +59,26 @@ const rulesContent: RuleSection[] = [
     },
 ];
 
-// ----------------- Component -----------------
-export default function FAQ() {
+export default function Rules() {
+    const todayFa = useMemo(
+        () => toPersianDigits(new Date().toLocaleDateString("fa-IR")),
+        []
+    );
+
+    const hydratedRules = useMemo<RuleSection[]>(() => {
+        return rulesContent.map((sec) =>
+            sec.title === "تاریخ آخرین بروزرسانی" && sec.body === "تکمیل شود"
+                ? { ...sec, body: todayFa }
+                : sec
+        );
+    }, [todayFa]);
+
     return (
         <section className="px-5 pt-50 pb-20 max-w-4xl mx-auto text-gray-800 leading-relaxed">
-            {rulesContent.map((section, index) => (
+            {hydratedRules.map((section, index) => (
                 <div key={index} className="mb-10">
                     <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
-                    <p className="mb-6 justify-fa whitespace-pre-line">{section.body}</p>
+                    <p className="whitespace-pre-line">{section.body}</p>
                 </div>
             ))}
         </section>

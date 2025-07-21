@@ -26,6 +26,7 @@ export default function FormView({ formData }: { formData: FormResult }) {
     const [data, setData] = useState<FormValidation>([]);
 
     const {
+        control,
         register,
         handleSubmit,
         formState: { errors },
@@ -148,8 +149,10 @@ export default function FormView({ formData }: { formData: FormResult }) {
                                     return (
                                         <div>
                                             <Counter
-                                                register={register(item.id.toString())}
+                                                control={control}
+                                                name={item.id.toString()}
                                                 label={item.title}
+                                                min={1}
                                             />
                                             <p className="text-danger text-sm mt-2">
                                                 {errors?.[item.id.toString()]?.message}

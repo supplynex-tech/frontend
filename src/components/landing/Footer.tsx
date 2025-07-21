@@ -46,9 +46,9 @@ export default function Footer() {
                     }
                 </ul>
                 <div className="flex flex-wrap gap-8 md:gap-12 md:w-1/5 relative md:pr-4">
-                    <div className="border-t md:border-r md:border-t-0 border-gray-300 md:pr-5">
+                    <div className="border-t w-full md:border-r md:border-t-0 border-gray-300 md:pr-5">
                         <h4 className="mb-5 text-gray-400 text-lg hidden md:block">راهنمای سایت</h4>
-                        <ul className="flex flex-row md:flex-col gap-10 md:gap-3 text-sm pt-5 md:pt-0">
+                        <ul className="flex flex-row justify-around md:flex-col gap-10 md:gap-3 text-sm pt-5 md:pt-0">
                             {siteLinks.map((link, index) => (
                                 <li key={index}>
                                     {link.href.endsWith('.xml') ? (
