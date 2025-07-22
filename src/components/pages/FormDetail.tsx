@@ -62,7 +62,7 @@ export default function FormDetailPage({ id }: {
                         >
                             <div className="py-3 text-primary-700 leading-relaxed">
                                 {
-                                    form?.status === "NO_ANSWER" ? <FormView formData={form} /> : <FormAnswers formDataAnswers={form.answers} />
+                                    form?.status === "NO_ANSWER" ? <FormView formData={form} /> : <FormAnswers formData={form} />
                                 }
                             </div>
                         </motion.div>
