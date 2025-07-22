@@ -7,6 +7,7 @@ interface PrimaryButtonProps {
     title: string;
     type: "button" | "submit" | "reset";
     className?: string;
+    onClick?: React.MouseEvent<HTMLButtonElement>
 }
 
 interface SecondaryButtonProps {
@@ -41,6 +42,19 @@ export function SecondaryActionButton({ title, type, className }: PrimaryButtonP
     )
 }
 
+export function TertiaryActionButton({ title, type, className, onClick }: PrimaryButtonProps) {
+    return (
+        <button
+            type={type}
+            className={`px-6 py-2 rounded-lg bg-primary-300 hover:bg-primary-400 font-semibold sm:text-md border-0  text-gray-50
+                  hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`}
+            onClick={onClick}
+        >
+            {title}
+        </button>
+    )
+}
+
 export function PrimaryNavigationButton({ title, href, className, onClick }: SecondaryButtonProps) {
     return (
         <Link href={href}>
@@ -69,11 +83,11 @@ export function SecondaryNavigationButton({ title, href, className, onClick }: S
 
 export function ExitNavigationButton({ title, href, className, onClick }: SecondaryButtonProps) {
     return (
-            <button
-                className={`px-6 py-2 rounded-lg bg-red-500 hover:bg-red-400 font-semibold sm:text-md border-0 text-gray-50
+        <button
+            className={`px-6 py-2 rounded-lg bg-red-500 hover:bg-red-400 font-semibold sm:text-md border-0 text-gray-50
                   hover:-translate-y-1 transform transition duration-200 hover:shadow-md cursor-pointer ${className}`}
-                onClick={onClick}
-            >
+            onClick={onClick}
+        >
             {title}
         </button>
     )

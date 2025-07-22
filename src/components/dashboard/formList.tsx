@@ -1,14 +1,22 @@
 "use client";
 
-import React, { JSX, useEffect, useState } from "react";
+import React, { Dispatch, JSX, SetStateAction, useEffect, useState } from "react";
 import { ResponseModal } from "../base/modal";
 import Link from "next/link";
 import Pagination from "../base/pagination";
 import { getUserFormList } from "@/services/api/dashboard";
 import { formatJalali } from "@/services/date";
 import TimeFormFilter from "./timeFormFilter";
+import { SecondaryActionButton, TertiaryActionButton } from "../base/button";
 
-export default function FormList() {
+interface props {
+    search?: string;
+    status?: string;
+    setSearch?: Dispatch<SetStateAction<string | undefined>>
+
+}
+
+export default function FormList({ search, setSearch, status }: props) {
     interface DashboardRowType {
         id: number;
         name: string;
@@ -67,7 +75,7 @@ export default function FormList() {
 
 
     useEffect(() => {
-        getUserFormList(pageNumber).then(data => {
+        getUserFormList(pageNumber, search, status).then(data => {
             const formListData: DashboardRowType[] = []
             data.results.map(data => formListData.push(
                 {
@@ -86,13 +94,44 @@ export default function FormList() {
             }));
         })
 
-    }, [pageNumber]);
+    }, [pageNumber, search, status]);
 
     return (
         <section className="pt-10">
-            <div className="mb-4 flex justify-between">
-                <span className="text-lg font-semibold pb-5">فرم‌های من</span>
+            <div className="mb-4 grid grid-cols-1 md:grid-cols-2">
+                <span className="text-lg font-semibold pb-5 justify-self-start">
+                    فرم‌های من
+                </span>
+                <div className="w-full md:w-[400px] justify-self-end">
+                    <div className="relative flex gap-2">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg
+                                className="w-4 h-4 text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 20"
+                            >
+                                <path
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                                />
+                            </svg>
+                        </div>
+
+                        <input
+                            type="search"
+                            id="default-search"
+                            className="block w-full ps-10 px-5 py-2 text-sm text-gray-900 rounded-lg bg-primary-50"
+                            placeholder="نام کالای مورد نظر خود را بنویسید..."
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </div>
+                </div>
             </div>
+
             <div
                 className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
         [&::-webkit-scrollbar]:h-1

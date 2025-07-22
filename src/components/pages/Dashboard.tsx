@@ -5,9 +5,12 @@ import Profile from "../dashboard/profile";
 import DashboardWrapper from "../dashboard/wrapper";
 import { FaPlus } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function DashboardPage() {
     const router = useRouter();
+    const [search, setSearch] = useState();
+    const [status, setStatus] = useState();
 
     return (
         <DashboardWrapper>
@@ -36,8 +39,8 @@ export default function DashboardPage() {
                 </div>
             </div>
 
-            <Profile />
-            <FormList />
+            <Profile setStatus={setStatus} />
+            <FormList search={search} setSearch={setSearch} status={status} />
         </DashboardWrapper>
     );
 }

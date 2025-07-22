@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'IRANSansX';
-  src: url('/assets/fonts/IRANSansX-Regular.woff2') format('woff2'),
-    url('/assets/fonts/IRANSansX-Regular.woff') format('woff');
-  font-weight: 400;
+  font-family: "IRANSansX";
   font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/IRANSansXFaNum-Regular.woff') format('woff'),
+    url('/assets/fonts/IRANSansXFaNum-Regular.woff2') format('woff2'),
+    url('/assets/fonts/IRANSansX-Regular.woff2') format('woff2'),
+    url('/assets/fonts/IRANSansX-Regular.woff') format('woff')
 }
 
 

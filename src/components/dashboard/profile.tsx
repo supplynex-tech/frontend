@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import userImage from "@/../public/assets/images/user.png";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { storage } from "../../services/storage";
 import { getDashboardOverview } from "@/services/api/dashboard";
 
@@ -15,12 +15,17 @@ interface StatItem {
     count: number;
     label: string;
     color: keyof typeof colorClasses;
+    status: string
 }
 
 interface UserData {
     text: string;
     phone: Phone;
     stats: StatItem[];
+}
+
+interface props {
+    setSearch: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const colorClasses = {
@@ -38,7 +43,7 @@ const colorClasses = {
     },
 } as const;
 
-export default function Profile() {
+export default function Profile({ setSearch, setStatus }: props) {
     const [userData, setUserData] = useState<UserData>({
         text: "خوش آمدید.",
         phone: { title: "شماره همراه", number: "" },
@@ -47,16 +52,19 @@ export default function Profile() {
                 count: 0,
                 label: "در انتظار پاسخ کاربر",
                 color: "primary-500",
+                status: "3"
             },
             {
                 count: 0,
                 label: "در حال بررسی",
                 color: "secondary-500",
+                status: "1"
             },
             {
                 count: 0,
                 label: "پایان یافته",
                 color: "emerald-600",
+                status: "2"
             },
         ],
     });
@@ -75,19 +83,16 @@ export default function Profile() {
                 ...prev,
                 stats: [
                     {
+                        ...prev.stats[0],
                         count: result.no_answer,
-                        label: "در انتظار پاسخ کاربر",
-                        color: "primary-500",
                     },
                     {
+                        ...prev.stats[1],
                         count: result.pending,
-                        label: "در حال بررسی",
-                        color: "secondary-500",
                     },
                     {
+                        ...prev.stats[2],
                         count: result.finished,
-                        label: "پایان یافته",
-                        color: "emerald-600",
                     },
                 ],
             }));
@@ -110,7 +115,8 @@ export default function Profile() {
                     <div
                         key={index}
                         className={`flex flex-col items-center bg-gray-50 border-l-4 ${colorClasses[item.color].border
-                            } rounded-lg py-3 shadow-sm`}
+                            } rounded-lg py-3 shadow-sm cursor-pointer`}
+                             onClick={() => setStatus(item.status)}
                     >
                         <span
                             className={`text-xl font-bold ${colorClasses[item.color].text

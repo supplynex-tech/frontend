@@ -12,12 +12,18 @@ export const getDashboardOverview = async (): Promise<overviewTypes> => {
     }
 }
 
-export const getUserFormList = async (pageNumber: number): Promise<PaginatedFormResponse> => {
+export const getUserFormList = async (pageNumber: number, search: string | undefined, status: string | undefined): Promise<PaginatedFormResponse> => {
     try {
         return await callApiWithOutToast({
             url: "form-generator/user-forms/",
             method: "GET",
-        }, {params: {page: pageNumber}})
+        }, {
+            params: {
+                page: pageNumber,
+                search: search,
+                status: status
+            }
+        })
     } catch (err) {
         throw err
     }
