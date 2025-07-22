@@ -84,7 +84,7 @@ export default function FormDetailPage({ id }: {
                     <PrimaryNavigationButton
                         title="داشبورد"
                         href="/dashboard"
-                        className="hidden md:block"
+                        className="hidden md:block  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                     />
                     <PrimaryIconButton href="/dashboard" className="md:hidden">
                         <FaArrowLeft />

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useEffect, unstable_startGestureTransition } from 'react';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { ExitNavigationButton, PrimaryNavigationButton } from '../base/button';
 import Image from 'next/image';
 import logoImage from "@/../public/assets/images/logo.png";
 import { useRouter } from 'next/navigation';
+import { storage } from '@/services/storage';
 
 interface NavItem {
   title: string;
@@ -27,6 +28,13 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hash, setHash] = useState('');
 
+  const [phoneNumber, setPhoneNumber] = useState<string | null>();
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("access_token");
+    setPhoneNumber(storage.getItem("phone_number"));
+  }, []);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setHash(window.location.hash);
@@ -41,9 +49,9 @@ export default function Navbar() {
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0">
           <PrimaryNavigationButton
-            title="ثبت‌نام | ورود"
-            href="/dashboard"
-            className="hidden md:flex justify-center w-[150px]"
+            title={phoneNumber ? "داشبورد" : "ثبت‌نام | ورود"}
+            href={phoneNumber ? "/dashboard" : "/register"}
+            className="hidden md:flex justify-center w-[150px]  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
           />
           <button
             type="button"
@@ -89,9 +97,9 @@ export default function Navbar() {
             })}
           </ul>
           <PrimaryNavigationButton
-            title="ثبت‌نام | ورود"
-            href="/dashboard"
-            className="md:hidden w-full"
+            title={phoneNumber ? "داشبورد" : "ثبت‌نام | ورود"}
+            href={phoneNumber ? "/dashboard" : "/register"}
+            className="md:hidden w-full  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
           />
         </div>
       </div>

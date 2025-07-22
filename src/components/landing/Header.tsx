@@ -49,7 +49,7 @@ export default function Header() {
                             <PrimaryNavigationButton
                                 title={headerContent.button}
                                 href="/form/default/new"
-                                className="w-full"
+                                className="w-full  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                             />
                         </div>
                     </div>

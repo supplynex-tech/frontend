@@ -29,7 +29,7 @@ export default function FormPage({ id }: {
                     <PrimaryNavigationButton
                         title="داشبورد"
                         href="/dashboard"
-                        className="hidden md:block"
+                        className="hidden md:block  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                     />
                     <SecondaryIconButton href="/dashboard" className="md:hidden">
                         <FaArrowLeft />

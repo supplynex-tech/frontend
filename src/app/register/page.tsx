@@ -1,3 +1,4 @@
+"use client";
 
 import RegisterPage from "@/components/pages/Register";
 

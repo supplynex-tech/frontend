@@ -14,7 +14,7 @@ export default function NotFound() {
                     className="w-2/5 md:w-1/3 h-auto"
                 />
                 <p className="text-gray-800 text-center">صفحه مورد نظر یافت نشد... :(</p>
-                <PrimaryNavigationButton title="برو به خانه" href="/" />
+                <PrimaryNavigationButton title="برو به خانه" href="/" className=" bg-secondary-500 hover:bg-secondary-400 text-gray-800"/>
             </section>
         </div>
     );

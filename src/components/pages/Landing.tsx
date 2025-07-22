@@ -1,3 +1,5 @@
+"use client";
+
 import Advantage from "../landing/Advantage";
 import CTA from "../landing/CTA";
 import Customers from "../landing/Customers";

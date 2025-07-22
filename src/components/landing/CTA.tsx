@@ -29,7 +29,7 @@ export default function CTA() {
                 <PrimaryNavigationButton
                     title={data.button}
                     href="/form/default/new"
-                    className="w-[200px] sm:w-[300px]"
+                    className="w-[200px] sm:w-[300px]  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                 />
             </div>
         </section>

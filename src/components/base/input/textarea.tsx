@@ -1,3 +1,5 @@
+"use client";
+
 import InputBox from "./inputBox";
 import {UseFormRegisterReturn} from "react-hook-form";
 

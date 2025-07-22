@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "../landing/Navbar";
 import Footer from "../landing/Footer";
 

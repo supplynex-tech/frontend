@@ -104,6 +104,7 @@ export default function About() {
                 <PrimaryNavigationButton
                     title={data.button.title}
                     href={data.button.href}
+                    className=" bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                 />
             </div>
         </section>

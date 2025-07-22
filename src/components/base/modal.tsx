@@ -1,3 +1,5 @@
+"use client";
+
 import {useRef} from "react";
 import RegisterView from "../register/registerView";
 import ResponseView from "../dashboard/responseView";
