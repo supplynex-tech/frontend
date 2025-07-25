@@ -62,4 +62,5 @@ export interface FormAnswer {
   form_question_id: number;
   form_question_title: string;
   answer: string;
+  image?: string;
 }

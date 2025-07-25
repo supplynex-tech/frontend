@@ -21,7 +21,8 @@ export const getUserFormList = async (pageNumber: number, search: string | undef
             params: {
                 page: pageNumber,
                 search: search,
-                status: status
+                status: status,
+                // is_parent: true,
             }
         })
     } catch (err) {

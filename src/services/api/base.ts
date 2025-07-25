@@ -4,7 +4,7 @@ import { authTypes } from '@/types/api';
 import format from "../../utils"
 import { Id, toast } from "react-toastify";
 
-const baseHost = "https://api.supplynex.ir"
+const baseHost = "http://127.0.0.1:8000"
 
 const api = axios.create({
     baseURL: `${baseHost}/api/v1/`,
