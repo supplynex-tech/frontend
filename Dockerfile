@@ -1,4 +1,4 @@
-FROM node:21-alpine as build-stage
+FROM registry.docker.ir/node:21-alpine as build-stage
 
 WORKDIR /app
 
