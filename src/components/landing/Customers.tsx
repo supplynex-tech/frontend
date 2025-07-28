@@ -78,7 +78,7 @@ export default function Customers() {
             end: 24,
             label: "میانگین زمان دریافت پیشنهاد",
             detail: "فرایند چندروزه را به چند ساعت کاهش دادیم",
-            suffix: "ساعت",
+            suffix: "h",
         },
         {
             end: 18,

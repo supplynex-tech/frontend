@@ -104,7 +104,7 @@ export default function FormList({ search, setSearch, status }: props) {
                 </span>
                 <div className="w-full md:w-[400px] justify-self-end">
                     <div className="relative flex gap-2">
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-5 pointer-events-none">
                             <svg
                                 className="w-4 h-4 text-gray-500"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -124,10 +124,12 @@ export default function FormList({ search, setSearch, status }: props) {
                         <input
                             type="search"
                             id="default-search"
-                            className="block w-full ps-10 px-5 py-2 text-sm text-gray-900 rounded-lg bg-primary-50"
+                            className="block w-full ps-12 pe-5 py-3 text-sm text-gray-800 rounded-lg bg-gray-50 border-2 border-gray-200 focus:border-gray-300 focus:outline-none"
                             placeholder="نام کالای مورد نظر خود را بنویسید..."
                             onChange={(e) => setSearch(e.target.value)}
                         />
+
+
                     </div>
                 </div>
             </div>

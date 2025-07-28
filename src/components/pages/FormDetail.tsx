@@ -79,7 +79,10 @@ export default function FormDetailPage({ id }: {
         <DashboardWrapper>
             <div className="flex flex-row justify-between items-center pt-5 pb-10">
                 {/* <h2 className="text-2xl font-bold">{formData?.name}</h2> */}
-                <h2 className="text-2xl font-bold">{formData?.main_key?.title}: {formData?.main_key?.value}</h2>
+                <div className="grid gap-3">
+                    <h2 className="text-2xl font-bold">{formData?.main_key?.title}: {formData?.main_key?.value}</h2>
+                    <h2 className="text-xl"> مبنا : {String(formData?.id || "").padStart(7, "0")}</h2>
+                </div>
                 <div className="flex items-center gap-2">
                     <PrimaryNavigationButton
                         title="داشبورد"

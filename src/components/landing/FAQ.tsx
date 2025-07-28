@@ -10,7 +10,7 @@ interface RuleSection {
 const rulesContent: RuleSection[] = [
     {
         title: "تاریخ آخرین بروزرسانی",
-        body: "تکمیل شود",
+        body: "1404/05/01",
     },
     {
         title: "مطالعه و پذیرش",
