@@ -17,9 +17,9 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
                             <span>{answer.form_question_title}: </span>
                             {
                                 answer.image?.includes("http://") ||
-                                answer.image?.includes("https://") ||
-                                answer.answer.includes("http://") ||
-                                answer.answer.includes("https://") ?
+                                    answer.image?.includes("https://") ||
+                                    answer.answer.includes("http://") ||
+                                    answer.answer.includes("https://") ?
                                     <img
                                         src={answer.image || answer.answer}
                                         alt={answer.image || answer.answer}
@@ -37,12 +37,13 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
                 })}
             </div>
 
-            {(formData.description_result || formData.image_result) && <hr className="my-6 border-t py-5 border-gray-300" />}
+            {(formData.description_result || formData.image_result) && <hr className=" border-t pt-5 border-gray-300" />}
             <div className="grid sm:grid-cols-2 grid-cols-1 gap-x-10">
                 {formData.description_result &&
                     <span>توضیحات: {formData.description_result}</span>}
                 {formData.image_result &&
-                    <span>پیوست:
+                    <div className="flex flex-row">
+                        <span className="pl-5">پیوست:</span>
                         <img
                             src={formData.image_result}
                             alt={formData.image_result}
@@ -52,7 +53,8 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
                                 setPreview(formData.image_result);
                             }}
                         />
-                    </span>}
+                    </div>
+                }
                 {preview && (
                     <div
                         className="fixed inset-0 bg-black/70 flex justify-center items-center z-50"
@@ -68,7 +70,7 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
                             <button
                                 onClick={async (e) => {
                                     e.stopPropagation();
-                                    const response = await fetch(preview);
+                                    const response = await fetch(preview.replace("http://", "https://"));
                                     const blob = await response.blob();
                                     const url = window.URL.createObjectURL(blob);
                                     const link = document.createElement('a');

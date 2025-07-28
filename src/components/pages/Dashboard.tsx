@@ -27,7 +27,7 @@ export default function DashboardPage() {
                     <PrimaryNavigationButton
                         title="خانه"
                         href="/"
-                        className="hidden md:flex bg-primary-500 hover:bg-primary-400 text-gray-50"
+                        className="hidden md:flex bg-primary-400 hover:bg-primary-300 text-gray-50"
                     />
 
                     <ExitNavigationButton
@@ -44,7 +44,7 @@ export default function DashboardPage() {
                     <PrimaryIconButton href="/form/default" className="md:hidden bg-secondary-500">
                         <FaPlus />
                     </PrimaryIconButton>
-                    <PrimaryIconButton href="/" className="md:hidden bg-primary-500">
+                    <PrimaryIconButton href="/" className="md:hidden bg-primary-400">
                         <FaHome />
                     </PrimaryIconButton>
                     <SecondaryIconButton type="button" className="md:hidden bg-red-600">

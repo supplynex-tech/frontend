@@ -6,8 +6,7 @@ import Link from "next/link";
 import Pagination from "../base/pagination";
 import { getUserFormList } from "@/services/api/dashboard";
 import { formatJalali } from "@/services/date";
-import TimeFormFilter from "./timeFormFilter";
-import { SecondaryActionButton, TertiaryActionButton } from "../base/button";
+import { FaEye } from "react-icons/fa";
 
 interface props {
     search?: string;
@@ -149,19 +148,22 @@ export default function FormList({ search, setSearch, status }: props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.tableData.map((row, idx) => (
-                            <tr key={idx} className="hover:bg-primary-50">
-                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
-                                <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id.toString().padStart(7, "0")}</td>
-                                <td className="p-4 border-b border-gray-200 text-sm">{row.name}</td>
-                                <td className="p-4 border-b border-gray-200 text-sm">
-                                    {getStatusSpan(row.status)}
-                                </td>
-                                <td className="p-4 border-b border-gray-200 text-sm">
-                                    <Link href={"/form/" + row.id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">مشاهده</Link>
-                                </td>
-                            </tr>
-                        ))}
+                        {
+                            data.tableData.map((row, idx) => (
+                                <tr key={idx} className="hover:bg-primary-50">
+                                    <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{formatJalali(row.createdAt)}</td>
+                                    <td className="p-4 border-b border-gray-200 text-primary-700 text-sm">{row.id.toString().padStart(7, "0")}</td>
+                                    <td className="p-4 border-b border-gray-200 text-sm">{row.name}</td>
+                                    <td className="p-4 border-b border-gray-200 text-sm">
+                                        {getStatusSpan(row.status)}
+                                    </td>
+                                    <td className="p-4 border-b border-gray-200 text-sm">
+                                        <Link href={"/form/" + row.id.toString()} className="text-primary-400 text font-medium hover:underline cursor-pointer animate-bounce">
+                                            <FaEye className="text-primary-400 text-xl" />
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>
