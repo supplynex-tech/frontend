@@ -135,13 +135,7 @@ export default function FormList({ search, setSearch, status }: props) {
             </div>
 
             <div
-                className="relative flex flex-col w-full h-full overflow-scroll text-gray-600 bg-gray-50 rounded-lg bg-clip-border overflow-y-auto
-        [&::-webkit-scrollbar]:h-1
-        [&::-webkit-scrollbar-track]:rounded-full
-        [&::-webkit-scrollbar-track]:bg-gray-200
-        [&::-webkit-scrollbar-thumb]:rounded-full
-        [&::-webkit-scrollbar-thumb]:bg-primary-300"
-            >
+                className="relative flex flex-col w-full h-full overflow-scroll scrollbar-rounded text-gray-600 bg-gray-50 rounded-lg bg-clip-border">
                 <table className="w-full text-right table-auto min-w-max">
                     <thead>
                         <tr>
