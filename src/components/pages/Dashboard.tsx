@@ -41,7 +41,7 @@ export default function DashboardPage() {
                         }
                         className="hidden md:flex"
                     />
-                    <PrimaryIconButton href="/form/default" className="md:hidden bg-secondary-500">
+                    <PrimaryIconButton href="/form/default/new" className="md:hidden bg-secondary-500">
                         <FaPlus />
                     </PrimaryIconButton>
                     <PrimaryIconButton href="/" className="md:hidden bg-primary-400">
