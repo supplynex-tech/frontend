@@ -64,7 +64,7 @@ export default function FormAnswers({ formData }: { formData: FormResult }) {
                             <img
                                 src={preview}
                                 alt="Preview"
-                                className="max-w-3xl max-h-[80vh] rounded-lg shadow-xl"
+                                className="w-[200] sm:w-[400] rounded-lg shadow-xl"
                                 onClick={(e) => e.stopPropagation()}
                             />
                             <button
