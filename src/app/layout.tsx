@@ -48,6 +48,23 @@ export default function RootLayout({
           src="https://widget-react.raychat.io/install/widget.js"
           strategy="afterInteractive"
         />
+        {/* <!-- Google tag (gtag.js) --> */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-YB2HLP09GK`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-YB2HLP09GK');
+          `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

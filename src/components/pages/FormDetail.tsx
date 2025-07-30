@@ -83,11 +83,11 @@ export default function FormDetailPage({ id }: {
                     <h2 className="text-2xl font-bold">{formData?.main_key?.title}: {formData?.main_key?.value}</h2>
                     <h2 className="text-lg"> کد رهگیری : {String(formData?.id || "").padStart(7, "0")}</h2>
                 </div>
-                <div className="flex items-center gap-2">
+                <div>
                     <PrimaryNavigationButton
                         title="داشبورد"
                         href="/dashboard"
-                        className="hidden md:block  bg-secondary-500 hover:bg-secondary-400 text-gray-800"
+                        className=" bg-secondary-500 hover:bg-secondary-400 text-gray-800"
                     />
                     <PrimaryIconButton href="/dashboard" className="md:hidden">
                         <FaArrowLeft />
